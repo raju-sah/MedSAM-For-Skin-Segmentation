@@ -1,0 +1,96 @@
+[{"stream_name":"stdout","time":8.100537109,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":8.100592884,"data":"  PHASE 7: sDDI CLINICAL GENERALIZATION \u0026 SKIN-TONE FAIRNESS BENCHMARK  \n"}
+,{"stream_name":"stdout","time":8.100597317,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":8.360508876,"data":"Device: cuda\n"}
+,{"stream_name":"stdout","time":8.403421898,"data":"GPU: Tesla T4\n"}
+,{"stream_name":"stdout","time":11.694085688,"data":"Found MedSAM Base Checkpoint: /kaggle/input/datasets/vinuchandrang/medsam-weights/medsam_vit_b.pth\n"}
+,{"stream_name":"stdout","time":11.78071546,"data":"Found DDI Images Directory: /kaggle/input/datasets/souvikda/ddidiversedermatologyimages-multimodal-dataset/ddidiversedermatologyimages/Images\n"}
+,{"stream_name":"stdout","time":11.816455375,"data":"Found sDDI Testing Masks Root: /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/ddi_labels/testing\n"}
+,{"stream_name":"stdout","time":11.934804497,"data":"  Decoder-Only (E04) Checkpoint: /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_decoder_only_model.pth\n"}
+,{"stream_name":"stdout","time":11.934821879,"data":"  LoRA (E05) Checkpoint: /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_lora_model.pth\n"}
+,{"stream_name":"stdout","time":11.934825557,"data":"  Standard Adapter (E06) Checkpoint: /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_standard_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":11.934828629,"data":"  CG-Adapter (E07) Checkpoint: /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_cg_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":11.946145726,"data":"Total clinical test samples: 198 (Expected 198)\n"}
+,{"stream_name":"stdout","time":17.624976822,"data":"\n"}
+,{"stream_name":"stdout","time":17.625003752,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":17.625008603,"data":"  EVALUATING MODEL: Zero-Shot MedSAM (E03)\n"}
+,{"stream_name":"stdout","time":17.625021481,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":52.526009419,"data":"  [Zero-Shot MedSAM (E03)] Processed 50/198 cases (30.4s)\n"}
+,{"stream_name":"stdout","time":82.519815968,"data":"  [Zero-Shot MedSAM (E03)] Processed 100/198 cases (60.4s)\n"}
+,{"stream_name":"stdout","time":113.87129841,"data":"  [Zero-Shot MedSAM (E03)] Processed 150/198 cases (91.7s)\n"}
+,{"stream_name":"stdout","time":145.070166403,"data":"  [Zero-Shot MedSAM (E03)] Processed 198/198 cases (122.9s)\n"}
+,{"stream_name":"stdout","time":145.088969044,"data":"\n"}
+,{"stream_name":"stdout","time":145.088994719,"data":"--\u003e Zero-Shot MedSAM (E03) Clean Dice (delta=0): Light=0.7886 | Med=0.7671 | Dark=0.7534 | Disparity(L-D)=0.0351\n"}
+,{"stream_name":"stdout","time":145.089001259,"data":"--\u003e Zero-Shot MedSAM (E03) Jitter 20% Dice:     Light=0.7224 | Dark=0.6725 | Disparity(L-D)=0.0500\n"}
+,{"stream_name":"stdout","time":145.118173075,"data":"\n"}
+,{"stream_name":"stdout","time":145.118197929,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":145.118203847,"data":"  EVALUATING MODEL: Decoder-Only (E04)\n"}
+,{"stream_name":"stdout","time":145.118208656,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":146.297545294,"data":"Loading weights from /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_decoder_only_model.pth...\n"}
+,{"stream_name":"stdout","time":146.416948966,"data":"Loaded weights: 120 params. (missing: 194, unexpected: 0)\n"}
+,{"stream_name":"stdout","time":178.929563457,"data":"  [Decoder-Only (E04)] Processed 50/198 cases (32.5s)\n"}
+,{"stream_name":"stdout","time":211.064134393,"data":"  [Decoder-Only (E04)] Processed 100/198 cases (64.6s)\n"}
+,{"stream_name":"stdout","time":243.162077159,"data":"  [Decoder-Only (E04)] Processed 150/198 cases (96.7s)\n"}
+,{"stream_name":"stdout","time":274.104675103,"data":"  [Decoder-Only (E04)] Processed 198/198 cases (127.7s)\n"}
+,{"stream_name":"stdout","time":274.11087477,"data":"\n"}
+,{"stream_name":"stdout","time":274.110893873,"data":"--\u003e Decoder-Only (E04) Clean Dice (delta=0): Light=0.8441 | Med=0.8480 | Dark=0.8301 | Disparity(L-D)=0.0139\n"}
+,{"stream_name":"stdout","time":274.110901078,"data":"--\u003e Decoder-Only (E04) Jitter 20% Dice:     Light=0.7976 | Dark=0.7830 | Disparity(L-D)=0.0147\n"}
+,{"stream_name":"stdout","time":274.153645491,"data":"\n"}
+,{"stream_name":"stdout","time":274.153666388,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":274.153673511,"data":"  EVALUATING MODEL: LoRA (r=16, E05)\n"}
+,{"stream_name":"stdout","time":274.153678398,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":275.163549096,"data":"Loading weights from /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_lora_model.pth...\n"}
+,{"stream_name":"stdout","time":276.038299792,"data":"Loaded weights: 192 params. (missing: 242, unexpected: 48)\n"}
+,{"stream_name":"stdout","time":308.713182677,"data":"  [LoRA (r=16, E05)] Processed 50/198 cases (32.7s)\n"}
+,{"stream_name":"stdout","time":341.536191537,"data":"  [LoRA (r=16, E05)] Processed 100/198 cases (65.5s)\n"}
+,{"stream_name":"stdout","time":374.561825485,"data":"  [LoRA (r=16, E05)] Processed 150/198 cases (98.5s)\n"}
+,{"stream_name":"stdout","time":406.162238725,"data":"  [LoRA (r=16, E05)] Processed 198/198 cases (130.1s)\n"}
+,{"stream_name":"stdout","time":406.168700422,"data":"\n"}
+,{"stream_name":"stdout","time":406.168719418,"data":"--\u003e LoRA (r=16, E05) Clean Dice (delta=0): Light=0.8651 | Med=0.8662 | Dark=0.8530 | Disparity(L-D)=0.0122\n"}
+,{"stream_name":"stdout","time":406.168725693,"data":"--\u003e LoRA (r=16, E05) Jitter 20% Dice:     Light=0.8084 | Dark=0.7789 | Disparity(L-D)=0.0295\n"}
+,{"stream_name":"stdout","time":406.21118897,"data":"\n"}
+,{"stream_name":"stdout","time":406.211213186,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":406.211220704,"data":"  EVALUATING MODEL: Standard Adapter (r=16, E06)\n"}
+,{"stream_name":"stdout","time":406.211225927,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":407.242026904,"data":"Loading weights from /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_standard_adapter_model.pth...\n"}
+,{"stream_name":"stdout","time":407.367473816,"data":"Loaded weights: 168 params. (missing: 194, unexpected: 0)\n"}
+,{"stream_name":"stdout","time":440.216795635,"data":"  [Standard Adapter (r=16, E06)] Processed 50/198 cases (32.8s)\n"}
+,{"stream_name":"stdout","time":472.585217538,"data":"  [Standard Adapter (r=16, E06)] Processed 100/198 cases (65.2s)\n"}
+,{"stream_name":"stdout","time":505.236124401,"data":"  [Standard Adapter (r=16, E06)] Processed 150/198 cases (97.9s)\n"}
+,{"stream_name":"stdout","time":536.439687703,"data":"  [Standard Adapter (r=16, E06)] Processed 198/198 cases (129.1s)\n"}
+,{"stream_name":"stdout","time":536.44596607,"data":"\n"}
+,{"stream_name":"stdout","time":536.445988097,"data":"--\u003e Standard Adapter (r=16, E06) Clean Dice (delta=0): Light=0.8336 | Med=0.8398 | Dark=0.8022 | Disparity(L-D)=0.0314\n"}
+,{"stream_name":"stdout","time":536.44600642,"data":"--\u003e Standard Adapter (r=16, E06) Jitter 20% Dice:     Light=0.7977 | Dark=0.7650 | Disparity(L-D)=0.0327\n"}
+,{"stream_name":"stdout","time":536.494752384,"data":"\n"}
+,{"stream_name":"stdout","time":536.494770412,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":536.494774518,"data":"  EVALUATING MODEL: CG-Adapter (Ours, E07)\n"}
+,{"stream_name":"stdout","time":536.494777946,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":537.481595042,"data":"Loading weights from /kaggle/input/datasets/rajucode/medsam-peft-skin-checkpoints/best_cg_adapter_model.pth...\n"}
+,{"stream_name":"stdout","time":537.631538432,"data":"Loaded weights: 216 params. (missing: 242, unexpected: 48)\n"}
+,{"stream_name":"stdout","time":790.768600993,"data":"  [CG-Adapter (Ours, E07)] Processed 50/198 cases (253.1s)\n"}
+,{"stream_name":"stdout","time":1043.372491156,"data":"  [CG-Adapter (Ours, E07)] Processed 100/198 cases (505.7s)\n"}
+,{"stream_name":"stdout","time":1296.659984095,"data":"  [CG-Adapter (Ours, E07)] Processed 150/198 cases (759.0s)\n"}
+,{"stream_name":"stdout","time":1539.273881839,"data":"  [CG-Adapter (Ours, E07)] Processed 198/198 cases (1001.6s)\n"}
+,{"stream_name":"stdout","time":1539.28048654,"data":"\n"}
+,{"stream_name":"stdout","time":1539.28050992,"data":"--\u003e CG-Adapter (Ours, E07) Clean Dice (delta=0): Light=0.8505 | Med=0.8449 | Dark=0.8234 | Disparity(L-D)=0.0270\n"}
+,{"stream_name":"stdout","time":1539.280517654,"data":"--\u003e CG-Adapter (Ours, E07) Jitter 20% Dice:     Light=0.8052 | Dark=0.7710 | Disparity(L-D)=0.0341\n"}
+,{"stream_name":"stdout","time":1539.442965413,"data":"\n"}
+,{"stream_name":"stdout","time":1539.442999594,"data":"Saved 9900 evaluations to sddi_clinical_fairness_results.csv\n"}
+,{"stream_name":"stdout","time":1539.443003983,"data":"\n"}
+,{"stream_name":"stdout","time":1539.443007108,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":1539.443010446,"data":"  COMPILING TABLE 2: CLINICAL GENERALIZATION \u0026 SKIN-TONE FAIRNESS MATRIX  \n"}
+,{"stream_name":"stdout","time":1539.443013763,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":1539.471826447,"data":"\n"}
+,{"stream_name":"stdout","time":1539.471862015,"data":"                       Model  Clean Overall Dice  Clean IoU  Clean HD95  FST I-II (Light)  FST III-IV (Med)  FST V-VI (Dark)  Disparity (L - D)  Jitter 20% Dice  Dark Jitter 20%  Disparity @ 20%  Drop @ 20%\n"}
+,{"stream_name":"stdout","time":1539.471868569,"data":"      Zero-Shot MedSAM (E03)            0.769433   0.643404    5.566606          0.788564          0.767126         0.753430           0.035134         0.700478         0.672451         0.049966   -0.068955\n"}
+,{"stream_name":"stdout","time":1539.471890642,"data":"          Decoder-Only (E04)            0.841517   0.735946    4.902485          0.844052          0.848048         0.830127           0.013924         0.796408         0.782972         0.014667   -0.045109\n"}
+,{"stream_name":"stdout","time":1539.471897096,"data":"            LoRA (r=16, E05)            0.861924   0.766984    4.181007          0.865150          0.866158         0.852959           0.012191         0.800949         0.778941         0.029504   -0.060975\n"}
+,{"stream_name":"stdout","time":1539.471903105,"data":"Standard Adapter (r=16, E06)            0.826785   0.717658    5.511460          0.833637          0.839832         0.802243           0.031394         0.789420         0.765004         0.032668   -0.037365\n"}
+,{"stream_name":"stdout","time":1539.471923535,"data":"      CG-Adapter (Ours, E07)            0.840163   0.736275    4.610254          0.850480          0.844890         0.823438           0.027042         0.795523         0.771025         0.034136   -0.044640\n"}
+,{"stream_name":"stderr","time":1544.761811572,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1544.761876472,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1545.056167717,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1545.056193432,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1545.759662769,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1547.220031251,"data":"[NbConvertApp] Writing 439969 bytes to __results__.html\n"}
+]

@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{External clinical generalization and skin-tone fairness benchmark on the clinician-verified sDDI test partition ($N=198$). Models trained strictly on ISIC 2018 dermoscopy are evaluated on clinical photographs across Fitzpatrick skin-tone cohorts. Disparity $\Delta_{\text{L-D}} = \text{Dice}_{\text{Light}} - \text{Dice}_{\text{Dark}}$ measures cross-tone performance inequity. Bold denotes superior performance and minimal disparity.}
+\label{tab:sddi_clinical_fairness}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l c ccc c ccc c}
+\toprule
+& \multicolumn{5}{c}{\textbf{Clean Bounding-Box Prompts ($\delta = 0.0$)}} & \multicolumn{4}{c}{\textbf{Imperfect Bounding-Box Prompts ($\delta = 0.20$ Noise)}} \\
+\cmidrule(lr){2-6} \cmidrule(lr){7-10}
+\textbf{Model Architecture} & \textbf{Overall} & \textbf{Light (I--II)} & \textbf{Med (III--IV)} & \textbf{Dark (V--VI)} & \textbf{Disparity $\Delta_{\text{L-D}}\downarrow$} & \textbf{Overall} & \textbf{Dark (V--VI)} & \textbf{Disparity $\Delta_{\text{L-D}}\downarrow$} & \textbf{Degradation $\Delta\downarrow$} \\
+\midrule
+Zero-Shot MedSAM (E03) & 0.7694 & 0.7886 & 0.7671 & 0.7534 & 0.0351 & 0.7005 & 0.6725 & 0.0500 & -0.0690 \\
+Decoder-Only (E04) & 0.8415 & 0.8441 & 0.8480 & 0.8301 & 0.0139 & 0.7964 & \textbf{0.7830} & \textbf{0.0147} & -0.0451 \\
+LoRA (r=16, E05) & 0.8619 & 0.8651 & 0.8662 & \textbf{0.8530} & \textbf{0.0122} & 0.8009 & 0.7789 & 0.0295 & -0.0610 \\
+Standard Adapter (r=16, E06) & 0.8268 & 0.8336 & 0.8398 & 0.8022 & 0.0314 & 0.7894 & 0.7650 & 0.0327 & -0.0374 \\
+\textbf{CG-Adapter (Ours, E07)} & 0.8402 & 0.8505 & 0.8449 & 0.8234 & 0.0270 & 0.7955 & 0.7710 & 0.0341 & -0.0446 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
