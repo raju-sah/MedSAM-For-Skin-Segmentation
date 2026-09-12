@@ -1,0 +1,30 @@
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Model Checkpoints and Weights
+*.pth
+*.pt
+*.bin
+*.onnx
+checkpoints/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Temporary and Scratch Directories
+tmp/
+scratch/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS and IDE Files
+.DS_Store
+.idea/
+.vscode/

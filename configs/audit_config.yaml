@@ -1,0 +1,50 @@
+# Configuration for Dataset Audit (E01) and Contrast Proxy Validation Preparation (E02)
+
+random_seed: 42
+split_seed: 42
+
+paths:
+  # Local temporary or data directories
+  sddi_labels_root: "/tmp/fedd_repo/ddi_labels"
+  isic_sample_dir: "/tmp/isic_sample"
+  manifests_dir: "manifests"
+  reports_dir: "reports"
+
+isic_2018:
+  dataset_ref: "tschandl/isic2018-challenge-task1-data-segmentation"
+  total_training_images: 2594
+  train_ratio: 0.80
+  val_ratio: 0.20
+  manifest_filename: "manifests/isic2018_task1_split_seed42.csv"
+  license: "CC0: Public Domain"
+
+sddi:
+  source_repo: "https://github.com/hectorcarrion/fedd"
+  license_masks: "MIT License"
+  license_images: "DDI Stanford Research Use Agreement (requires registration at ddi-dataset.github.io)"
+  expected_classes:
+    0: "background"
+    1: "lesion"
+    2: "marker"
+    3: "ruler"
+    4: "skin"
+  splits:
+    test:
+      test_light: "testing/test_light"
+      test_med: "testing/test_med"
+      test_dark: "testing/test_dark"
+    training_10_percent:
+      train: "training/10%/train"
+      val: "training/10%/val"
+
+contrast_proxy:
+  alpha_core_erosion: 0.50
+  beta_ring_margin: 0.25
+  min_luminance: 10.0
+  max_luminance: 95.0
+  b_star_epsilon: 1e-4
+
+prompt_perturbation:
+  levels: [0.0, 0.05, 0.10, 0.20]
+  num_realizations: 3
+  realization_seeds: [101, 102, 103]
