@@ -1,0 +1,25 @@
+[{"stream_name":"stdout","time":16.631990964,"data":"Running Causal Ablation Study on cuda...\n"}
+,{"stream_name":"stdout","time":17.437156362,"data":"Total samples: 198\n"}
+,{"stream_name":"stdout","time":31.470223051,"data":"\n"}
+,{"stream_name":"stdout","time":31.470267279,"data":"Evaluating Ablation Variant: Full CG-Adapter (Ours)\n"}
+,{"stream_name":"stdout","time":410.783975922,"data":"--\u003e Full CG-Adapter (Ours) (379.3s) | Clean Dice: 0.8406 | Jitter 20% Dice: 0.8075\n"}
+,{"stream_name":"stdout","time":410.784055482,"data":"\n"}
+,{"stream_name":"stdout","time":410.784062535,"data":"Evaluating Ablation Variant: Constant Gate (gamma = 1.0)\n"}
+,{"stream_name":"stdout","time":797.056007962,"data":"--\u003e Constant Gate (gamma = 1.0) (386.3s) | Clean Dice: 0.8415 | Jitter 20% Dice: 0.8083\n"}
+,{"stream_name":"stdout","time":797.056066734,"data":"\n"}
+,{"stream_name":"stdout","time":797.056071644,"data":"Evaluating Ablation Variant: Shuffled Contrast Proxy\n"}
+,{"stream_name":"stdout","time":1182.693452455,"data":"--\u003e Shuffled Contrast Proxy (385.6s) | Clean Dice: 0.8410 | Jitter 20% Dice: 0.8080\n"}
+,{"stream_name":"stdout","time":1182.693498712,"data":"\n"}
+,{"stream_name":"stdout","time":1182.693505845,"data":"Evaluating Ablation Variant: Sign-Inverted Proxy (-c)\n"}
+,{"stream_name":"stdout","time":1569.726518259,"data":"--\u003e Sign-Inverted Proxy (-c) (387.0s) | Clean Dice: 0.8405 | Jitter 20% Dice: 0.8077\n"}
+,{"stream_name":"stdout","time":1569.726570813,"data":"\n"}
+,{"stream_name":"stdout","time":1569.726577111,"data":"Evaluating Ablation Variant: Luminance-Only (Delta L*)\n"}
+,{"stream_name":"stdout","time":1956.879851061,"data":"--\u003e Luminance-Only (Delta L*) (387.2s) | Clean Dice: 0.8407 | Jitter 20% Dice: 0.8075\n"}
+,{"stream_name":"stdout","time":1956.928342682,"data":"Saved causal_ablation_results.csv\n"}
+,{"stream_name":"stderr","time":1962.549011885,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1962.549090203,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1962.841072183,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1962.841103529,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1963.543583744,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1964.882007878,"data":"[NbConvertApp] Writing 355071 bytes to __results__.html\n"}
+]
