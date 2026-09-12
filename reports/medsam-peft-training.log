@@ -1,0 +1,136 @@
+[{"stream_name":"stdout","time":15.84648264,"data":"=== KAGGLE PEFT MedSAM TRAINING: CG_ADAPTER ===\n"}
+,{"stream_name":"stdout","time":16.110258714,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":25.080611469,"data":"Loaded checkpoint from: /kaggle/input/datasets/vinuchandrang/medsam-weights/medsam_vit_b.pth\n"}
+,{"stream_name":"stdout","time":28.902031267,"data":"Total masks found: 2594\n"}
+,{"stream_name":"stdout","time":28.927124521,"data":"Image directory: /kaggle/input/datasets/tschandl/isic2018-challenge-task1-data-segmentation/ISIC2018_Task1-2_Training_Input\n"}
+,{"stream_name":"stdout","time":28.927148263,"data":"Train samples: 2075 | Val samples: 519\n"}
+,{"stream_name":"stdout","time":28.929550763,"data":"Trainable parameters: 4,363,824 / 94,040,956 (4.64%)\n"}
+,{"stream_name":"stdout","time":78.003930394,"data":"[Epoch 1/5] Step 100/2075 | Loss: 0.2174 | Elapsed: 49.1s\n"}
+,{"stream_name":"stdout","time":125.607520302,"data":"[Epoch 1/5] Step 200/2075 | Loss: 0.2164 | Elapsed: 96.7s\n"}
+,{"stream_name":"stdout","time":173.360551502,"data":"[Epoch 1/5] Step 300/2075 | Loss: 0.2078 | Elapsed: 144.4s\n"}
+,{"stream_name":"stdout","time":225.332056183,"data":"[Epoch 1/5] Step 400/2075 | Loss: 0.1973 | Elapsed: 196.4s\n"}
+,{"stream_name":"stdout","time":274.479656491,"data":"[Epoch 1/5] Step 500/2075 | Loss: 0.1898 | Elapsed: 245.5s\n"}
+,{"stream_name":"stdout","time":324.031500406,"data":"[Epoch 1/5] Step 600/2075 | Loss: 0.1833 | Elapsed: 295.1s\n"}
+,{"stream_name":"stdout","time":373.654947769,"data":"[Epoch 1/5] Step 700/2075 | Loss: 0.1803 | Elapsed: 344.7s\n"}
+,{"stream_name":"stdout","time":423.913919002,"data":"[Epoch 1/5] Step 800/2075 | Loss: 0.1753 | Elapsed: 395.0s\n"}
+,{"stream_name":"stdout","time":473.180241386,"data":"[Epoch 1/5] Step 900/2075 | Loss: 0.1718 | Elapsed: 444.2s\n"}
+,{"stream_name":"stdout","time":522.328565698,"data":"[Epoch 1/5] Step 1000/2075 | Loss: 0.1708 | Elapsed: 493.4s\n"}
+,{"stream_name":"stdout","time":574.179949117,"data":"[Epoch 1/5] Step 1100/2075 | Loss: 0.1685 | Elapsed: 545.2s\n"}
+,{"stream_name":"stdout","time":624.867214396,"data":"[Epoch 1/5] Step 1200/2075 | Loss: 0.1669 | Elapsed: 595.9s\n"}
+,{"stream_name":"stdout","time":675.199940352,"data":"[Epoch 1/5] Step 1300/2075 | Loss: 0.1661 | Elapsed: 646.3s\n"}
+,{"stream_name":"stdout","time":724.729068139,"data":"[Epoch 1/5] Step 1400/2075 | Loss: 0.1650 | Elapsed: 695.8s\n"}
+,{"stream_name":"stdout","time":773.39160629,"data":"[Epoch 1/5] Step 1500/2075 | Loss: 0.1624 | Elapsed: 744.5s\n"}
+,{"stream_name":"stdout","time":823.80748021,"data":"[Epoch 1/5] Step 1600/2075 | Loss: 0.1611 | Elapsed: 794.9s\n"}
+,{"stream_name":"stdout","time":873.268588518,"data":"[Epoch 1/5] Step 1700/2075 | Loss: 0.1591 | Elapsed: 844.3s\n"}
+,{"stream_name":"stdout","time":923.941539697,"data":"[Epoch 1/5] Step 1800/2075 | Loss: 0.1600 | Elapsed: 895.0s\n"}
+,{"stream_name":"stdout","time":973.702237678,"data":"[Epoch 1/5] Step 1900/2075 | Loss: 0.1602 | Elapsed: 944.8s\n"}
+,{"stream_name":"stdout","time":1023.85726084,"data":"[Epoch 1/5] Step 2000/2075 | Loss: 0.1588 | Elapsed: 994.9s\n"}
+,{"stream_name":"stdout","time":1060.908942425,"data":"[Epoch 1/5] Step 2075/2075 | Loss: 0.1582 | Elapsed: 1032.0s\n"}
+,{"stream_name":"stdout","time":1177.569503634,"data":"=== [Epoch 1 Results] Mean Val Dice: 0.9546 | Mean Val IoU: 0.9142 ===\n"}
+,{"stream_name":"stdout","time":1177.619532579,"data":"--\u003e Saved new best checkpoint: /kaggle/working/best_cg_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":1229.071091236,"data":"[Epoch 2/5] Step 100/2075 | Loss: 0.1225 | Elapsed: 51.5s\n"}
+,{"stream_name":"stdout","time":1278.752890215,"data":"[Epoch 2/5] Step 200/2075 | Loss: 0.1233 | Elapsed: 101.1s\n"}
+,{"stream_name":"stdout","time":1328.27986841,"data":"[Epoch 2/5] Step 300/2075 | Loss: 0.1310 | Elapsed: 150.7s\n"}
+,{"stream_name":"stdout","time":1378.136118013,"data":"[Epoch 2/5] Step 400/2075 | Loss: 0.1317 | Elapsed: 200.5s\n"}
+,{"stream_name":"stdout","time":1427.188157913,"data":"[Epoch 2/5] Step 500/2075 | Loss: 0.1299 | Elapsed: 249.6s\n"}
+,{"stream_name":"stdout","time":1478.497850736,"data":"[Epoch 2/5] Step 600/2075 | Loss: 0.1298 | Elapsed: 300.9s\n"}
+,{"stream_name":"stdout","time":1527.711079243,"data":"[Epoch 2/5] Step 700/2075 | Loss: 0.1295 | Elapsed: 350.1s\n"}
+,{"stream_name":"stdout","time":1576.911888019,"data":"[Epoch 2/5] Step 800/2075 | Loss: 0.1294 | Elapsed: 399.3s\n"}
+,{"stream_name":"stdout","time":1626.601217873,"data":"[Epoch 2/5] Step 900/2075 | Loss: 0.1284 | Elapsed: 449.0s\n"}
+,{"stream_name":"stdout","time":1676.852798023,"data":"[Epoch 2/5] Step 1000/2075 | Loss: 0.1277 | Elapsed: 499.2s\n"}
+,{"stream_name":"stdout","time":1726.918327282,"data":"[Epoch 2/5] Step 1100/2075 | Loss: 0.1271 | Elapsed: 549.3s\n"}
+,{"stream_name":"stdout","time":1775.905819317,"data":"[Epoch 2/5] Step 1200/2075 | Loss: 0.1262 | Elapsed: 598.3s\n"}
+,{"stream_name":"stdout","time":1824.965755566,"data":"[Epoch 2/5] Step 1300/2075 | Loss: 0.1261 | Elapsed: 647.3s\n"}
+,{"stream_name":"stdout","time":1873.917484709,"data":"[Epoch 2/5] Step 1400/2075 | Loss: 0.1258 | Elapsed: 696.3s\n"}
+,{"stream_name":"stdout","time":1925.509320936,"data":"[Epoch 2/5] Step 1500/2075 | Loss: 0.1266 | Elapsed: 747.9s\n"}
+,{"stream_name":"stdout","time":1976.739404622,"data":"[Epoch 2/5] Step 1600/2075 | Loss: 0.1269 | Elapsed: 799.1s\n"}
+,{"stream_name":"stdout","time":2026.756614044,"data":"[Epoch 2/5] Step 1700/2075 | Loss: 0.1261 | Elapsed: 849.1s\n"}
+,{"stream_name":"stdout","time":2077.88979471,"data":"[Epoch 2/5] Step 1800/2075 | Loss: 0.1257 | Elapsed: 900.3s\n"}
+,{"stream_name":"stdout","time":2126.558469385,"data":"[Epoch 2/5] Step 1900/2075 | Loss: 0.1245 | Elapsed: 948.9s\n"}
+,{"stream_name":"stdout","time":2176.734794774,"data":"[Epoch 2/5] Step 2000/2075 | Loss: 0.1283 | Elapsed: 999.1s\n"}
+,{"stream_name":"stdout","time":2213.41731733,"data":"[Epoch 2/5] Step 2075/2075 | Loss: 0.1276 | Elapsed: 1035.8s\n"}
+,{"stream_name":"stdout","time":2329.76627365,"data":"=== [Epoch 2 Results] Mean Val Dice: 0.9540 | Mean Val IoU: 0.9133 ===\n"}
+,{"stream_name":"stdout","time":2379.950256619,"data":"[Epoch 3/5] Step 100/2075 | Loss: 0.1353 | Elapsed: 50.2s\n"}
+,{"stream_name":"stdout","time":2429.971177586,"data":"[Epoch 3/5] Step 200/2075 | Loss: 0.1231 | Elapsed: 100.2s\n"}
+,{"stream_name":"stdout","time":2479.896955909,"data":"[Epoch 3/5] Step 300/2075 | Loss: 0.1230 | Elapsed: 150.1s\n"}
+,{"stream_name":"stdout","time":2529.12192724,"data":"[Epoch 3/5] Step 400/2075 | Loss: 0.1186 | Elapsed: 199.4s\n"}
+,{"stream_name":"stdout","time":2579.221704024,"data":"[Epoch 3/5] Step 500/2075 | Loss: 0.1163 | Elapsed: 249.5s\n"}
+,{"stream_name":"stdout","time":2629.772690357,"data":"[Epoch 3/5] Step 600/2075 | Loss: 0.1172 | Elapsed: 300.0s\n"}
+,{"stream_name":"stdout","time":2679.499582562,"data":"[Epoch 3/5] Step 700/2075 | Loss: 0.1177 | Elapsed: 349.7s\n"}
+,{"stream_name":"stdout","time":2729.053671114,"data":"[Epoch 3/5] Step 800/2075 | Loss: 0.1189 | Elapsed: 399.3s\n"}
+,{"stream_name":"stdout","time":2777.944086223,"data":"[Epoch 3/5] Step 900/2075 | Loss: 0.1196 | Elapsed: 448.2s\n"}
+,{"stream_name":"stdout","time":2828.68751543,"data":"[Epoch 3/5] Step 1000/2075 | Loss: 0.1210 | Elapsed: 498.9s\n"}
+,{"stream_name":"stdout","time":2877.913144368,"data":"[Epoch 3/5] Step 1100/2075 | Loss: 0.1197 | Elapsed: 548.1s\n"}
+,{"stream_name":"stdout","time":2927.772777446,"data":"[Epoch 3/5] Step 1200/2075 | Loss: 0.1194 | Elapsed: 598.0s\n"}
+,{"stream_name":"stdout","time":2977.36369107,"data":"[Epoch 3/5] Step 1300/2075 | Loss: 0.1192 | Elapsed: 647.6s\n"}
+,{"stream_name":"stdout","time":3027.878431573,"data":"[Epoch 3/5] Step 1400/2075 | Loss: 0.1191 | Elapsed: 698.1s\n"}
+,{"stream_name":"stdout","time":3076.825059838,"data":"[Epoch 3/5] Step 1500/2075 | Loss: 0.1192 | Elapsed: 747.1s\n"}
+,{"stream_name":"stdout","time":3127.046808092,"data":"[Epoch 3/5] Step 1600/2075 | Loss: 0.1188 | Elapsed: 797.3s\n"}
+,{"stream_name":"stdout","time":3176.889975633,"data":"[Epoch 3/5] Step 1700/2075 | Loss: 0.1196 | Elapsed: 847.1s\n"}
+,{"stream_name":"stdout","time":3225.997703461,"data":"[Epoch 3/5] Step 1800/2075 | Loss: 0.1201 | Elapsed: 896.2s\n"}
+,{"stream_name":"stdout","time":3275.540678444,"data":"[Epoch 3/5] Step 1900/2075 | Loss: 0.1192 | Elapsed: 945.8s\n"}
+,{"stream_name":"stdout","time":3327.246682804,"data":"[Epoch 3/5] Step 2000/2075 | Loss: 0.1205 | Elapsed: 997.5s\n"}
+,{"stream_name":"stdout","time":3363.887800968,"data":"[Epoch 3/5] Step 2075/2075 | Loss: 0.1202 | Elapsed: 1034.1s\n"}
+,{"stream_name":"stdout","time":3480.189481518,"data":"=== [Epoch 3 Results] Mean Val Dice: 0.9573 | Mean Val IoU: 0.9191 ===\n"}
+,{"stream_name":"stdout","time":3480.251431933,"data":"--\u003e Saved new best checkpoint: /kaggle/working/best_cg_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":3531.661542956,"data":"[Epoch 4/5] Step 100/2075 | Loss: 0.0873 | Elapsed: 51.4s\n"}
+,{"stream_name":"stdout","time":3581.046873161,"data":"[Epoch 4/5] Step 200/2075 | Loss: 0.1227 | Elapsed: 100.8s\n"}
+,{"stream_name":"stdout","time":3629.8929683,"data":"[Epoch 4/5] Step 300/2075 | Loss: 0.1241 | Elapsed: 149.6s\n"}
+,{"stream_name":"stdout","time":3678.928033454,"data":"[Epoch 4/5] Step 400/2075 | Loss: 0.1196 | Elapsed: 198.7s\n"}
+,{"stream_name":"stdout","time":3727.788795453,"data":"[Epoch 4/5] Step 500/2075 | Loss: 0.1201 | Elapsed: 247.5s\n"}
+,{"stream_name":"stdout","time":3777.491395858,"data":"[Epoch 4/5] Step 600/2075 | Loss: 0.1173 | Elapsed: 297.2s\n"}
+,{"stream_name":"stdout","time":3827.081622315,"data":"[Epoch 4/5] Step 700/2075 | Loss: 0.1189 | Elapsed: 346.8s\n"}
+,{"stream_name":"stdout","time":3876.567009969,"data":"[Epoch 4/5] Step 800/2075 | Loss: 0.1199 | Elapsed: 396.3s\n"}
+,{"stream_name":"stdout","time":3925.201701635,"data":"[Epoch 4/5] Step 900/2075 | Loss: 0.1177 | Elapsed: 444.9s\n"}
+,{"stream_name":"stdout","time":3975.025267499,"data":"[Epoch 4/5] Step 1000/2075 | Loss: 0.1169 | Elapsed: 494.8s\n"}
+,{"stream_name":"stdout","time":4025.014219792,"data":"[Epoch 4/5] Step 1100/2075 | Loss: 0.1152 | Elapsed: 544.8s\n"}
+,{"stream_name":"stdout","time":4074.49114118,"data":"[Epoch 4/5] Step 1200/2075 | Loss: 0.1146 | Elapsed: 594.2s\n"}
+,{"stream_name":"stdout","time":4124.51235546,"data":"[Epoch 4/5] Step 1300/2075 | Loss: 0.1137 | Elapsed: 644.3s\n"}
+,{"stream_name":"stdout","time":4174.482556508,"data":"[Epoch 4/5] Step 1400/2075 | Loss: 0.1140 | Elapsed: 694.2s\n"}
+,{"stream_name":"stdout","time":4223.683742477,"data":"[Epoch 4/5] Step 1500/2075 | Loss: 0.1137 | Elapsed: 743.4s\n"}
+,{"stream_name":"stdout","time":4272.948891267,"data":"[Epoch 4/5] Step 1600/2075 | Loss: 0.1145 | Elapsed: 792.7s\n"}
+,{"stream_name":"stdout","time":4323.801446996,"data":"[Epoch 4/5] Step 1700/2075 | Loss: 0.1141 | Elapsed: 843.5s\n"}
+,{"stream_name":"stdout","time":4373.118947673,"data":"[Epoch 4/5] Step 1800/2075 | Loss: 0.1132 | Elapsed: 892.9s\n"}
+,{"stream_name":"stdout","time":4422.548388499,"data":"[Epoch 4/5] Step 1900/2075 | Loss: 0.1122 | Elapsed: 942.3s\n"}
+,{"stream_name":"stdout","time":4472.354931711,"data":"[Epoch 4/5] Step 2000/2075 | Loss: 0.1118 | Elapsed: 992.1s\n"}
+,{"stream_name":"stdout","time":4509.062518078,"data":"[Epoch 4/5] Step 2075/2075 | Loss: 0.1117 | Elapsed: 1028.8s\n"}
+,{"stream_name":"stdout","time":4625.494843167,"data":"=== [Epoch 4 Results] Mean Val Dice: 0.9590 | Mean Val IoU: 0.9222 ===\n"}
+,{"stream_name":"stdout","time":4625.548689042,"data":"--\u003e Saved new best checkpoint: /kaggle/working/best_cg_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":4676.205780342,"data":"[Epoch 5/5] Step 100/2075 | Loss: 0.1689 | Elapsed: 50.7s\n"}
+,{"stream_name":"stdout","time":4725.345175245,"data":"[Epoch 5/5] Step 200/2075 | Loss: 0.1425 | Elapsed: 99.8s\n"}
+,{"stream_name":"stdout","time":4774.651005586,"data":"[Epoch 5/5] Step 300/2075 | Loss: 0.1302 | Elapsed: 149.1s\n"}
+,{"stream_name":"stdout","time":4823.841906463,"data":"[Epoch 5/5] Step 400/2075 | Loss: 0.1265 | Elapsed: 198.3s\n"}
+,{"stream_name":"stdout","time":4873.574340395,"data":"[Epoch 5/5] Step 500/2075 | Loss: 0.1217 | Elapsed: 248.0s\n"}
+,{"stream_name":"stdout","time":4924.35753231,"data":"[Epoch 5/5] Step 600/2075 | Loss: 0.1167 | Elapsed: 298.8s\n"}
+,{"stream_name":"stdout","time":4975.016374665,"data":"[Epoch 5/5] Step 700/2075 | Loss: 0.1132 | Elapsed: 349.5s\n"}
+,{"stream_name":"stdout","time":5025.71440275,"data":"[Epoch 5/5] Step 800/2075 | Loss: 0.1128 | Elapsed: 400.2s\n"}
+,{"stream_name":"stdout","time":5075.138847443,"data":"[Epoch 5/5] Step 900/2075 | Loss: 0.1107 | Elapsed: 449.6s\n"}
+,{"stream_name":"stdout","time":5124.932494576,"data":"[Epoch 5/5] Step 1000/2075 | Loss: 0.1099 | Elapsed: 499.4s\n"}
+,{"stream_name":"stdout","time":5173.594808964,"data":"[Epoch 5/5] Step 1100/2075 | Loss: 0.1089 | Elapsed: 548.0s\n"}
+,{"stream_name":"stdout","time":5223.389115527,"data":"[Epoch 5/5] Step 1200/2075 | Loss: 0.1082 | Elapsed: 597.8s\n"}
+,{"stream_name":"stdout","time":5272.98665122,"data":"[Epoch 5/5] Step 1300/2075 | Loss: 0.1080 | Elapsed: 647.4s\n"}
+,{"stream_name":"stdout","time":5322.805125883,"data":"[Epoch 5/5] Step 1400/2075 | Loss: 0.1075 | Elapsed: 697.3s\n"}
+,{"stream_name":"stdout","time":5372.415941849,"data":"[Epoch 5/5] Step 1500/2075 | Loss: 0.1083 | Elapsed: 746.9s\n"}
+,{"stream_name":"stdout","time":5424.204774141,"data":"[Epoch 5/5] Step 1600/2075 | Loss: 0.1076 | Elapsed: 798.7s\n"}
+,{"stream_name":"stdout","time":5474.520923909,"data":"[Epoch 5/5] Step 1700/2075 | Loss: 0.1068 | Elapsed: 849.0s\n"}
+,{"stream_name":"stdout","time":5525.23439736,"data":"[Epoch 5/5] Step 1800/2075 | Loss: 0.1067 | Elapsed: 899.7s\n"}
+,{"stream_name":"stdout","time":5573.880522025,"data":"[Epoch 5/5] Step 1900/2075 | Loss: 0.1065 | Elapsed: 948.3s\n"}
+,{"stream_name":"stdout","time":5622.960648888,"data":"[Epoch 5/5] Step 2000/2075 | Loss: 0.1064 | Elapsed: 997.4s\n"}
+,{"stream_name":"stdout","time":5659.916430124,"data":"[Epoch 5/5] Step 2075/2075 | Loss: 0.1062 | Elapsed: 1034.4s\n"}
+,{"stream_name":"stdout","time":5776.24429704,"data":"=== [Epoch 5 Results] Mean Val Dice: 0.9591 | Mean Val IoU: 0.9224 ===\n"}
+,{"stream_name":"stdout","time":5776.294959569,"data":"--\u003e Saved new best checkpoint: /kaggle/working/best_cg_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":5776.295005763,"data":"\n"}
+,{"stream_name":"stdout","time":5776.295012971,"data":"=== Running Final Validation Robustness Evaluation across Prompt Jitter ===\n"}
+,{"stream_name":"stdout","time":5830.732320024,"data":"Delta = 0.00 | Dice = 0.9638 | IoU = 0.9309\n"}
+,{"stream_name":"stdout","time":5884.746439917,"data":"Delta = 0.05 | Dice = 0.9608 | IoU = 0.9253\n"}
+,{"stream_name":"stdout","time":5938.633807906,"data":"Delta = 0.10 | Dice = 0.9553 | IoU = 0.9152\n"}
+,{"stream_name":"stdout","time":5992.539979182,"data":"Delta = 0.20 | Dice = 0.9323 | IoU = 0.8768\n"}
+,{"stream_name":"stdout","time":5992.574587596,"data":"\n"}
+,{"stream_name":"stdout","time":5992.574613823,"data":"Execution finished successfully for cg_adapter!\n"}
+,{"stream_name":"stderr","time":5998.310797597,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5998.310872265,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5998.611078816,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5998.611126532,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5999.302231049,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":6000.774308194,"data":"[NbConvertApp] Writing 413211 bytes to __results__.html\n"}
+]
