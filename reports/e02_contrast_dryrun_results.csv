@@ -1,0 +1,6 @@
+sample_id,source,image_dimensions,bbox,lesion_area_fraction,core_lesion_purity,skin_proxy_purity,lesion_spillover,delta_ita,delta_l,delta_e_ab,core_median_ita,skin_median_ita,core_valid_pixels,skin_valid_pixels,is_valid
+ISIC_0000000,ISIC 2018 Task 1 Sample,"[767, 1022]","[49, 46, 901, 636]",0.4697,1.0,1.0,0.0,217.3649,64.8926,68.845,-92.9185,124.4465,123148,277622,True
+Synthetic_FST_I_Light,Synthetic Multi-Tone Audit (I-II),"[256, 256]","[80, 80, 180, 180]",0.1526,1.0,1.0,0.0,137.042,65.1184,65.4747,-65.3036,71.7384,2500,12500,True
+Synthetic_FST_III_Medium,Synthetic Multi-Tone Audit (III-IV),"[256, 256]","[80, 80, 180, 180]",0.1526,1.0,1.0,0.0,110.3746,47.5708,48.6257,-68.9135,41.4611,2500,12500,True
+Synthetic_FST_VI_Dark,Synthetic Multi-Tone Audit (V-VI),"[256, 256]","[80, 80, 180, 180]",0.1526,1.0,1.0,0.0,22.326,17.1326,18.7714,-81.0976,-58.7717,2500,12500,True
+Synthetic_FST_VI_LowContrast,Synthetic Multi-Tone Audit (V-VI),"[256, 256]","[80, 80, 180, 180]",0.1526,1.0,1.0,0.0,6.7031,6.4331,6.9102,-78.5722,-71.8691,2500,12500,True

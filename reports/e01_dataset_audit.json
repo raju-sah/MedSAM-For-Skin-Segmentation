@@ -1,0 +1,166 @@
+{
+  "audit_version": "E01-v1.0",
+  "random_seed": 42,
+  "isic_2018": {
+    "dataset_name": "ISIC 2018 Task 1 (Lesion Boundary Segmentation)",
+    "total_masks": 2594,
+    "unique_image_ids": 2594,
+    "is_strictly_binary": true,
+    "unique_dimensions_count": 206,
+    "dimension_examples": [
+      [
+        566,
+        679
+      ],
+      [
+        4420,
+        6640
+      ],
+      [
+        4441,
+        6681
+      ],
+      [
+        4439,
+        6748
+      ],
+      [
+        4422,
+        6622
+      ]
+    ],
+    "lesion_area_statistics": {
+      "mean": 0.21402130154382532,
+      "std": 0.20832557709337013,
+      "min": 0.0029767287234042554,
+      "q25": 0.051730606153309995,
+      "median": 0.13808377583821613,
+      "q75": 0.3187331093682183,
+      "max": 0.9866498311360677
+    },
+    "split_manifest": {
+      "manifest_path": "manifests/isic2018_task1_split_seed42.csv",
+      "random_seed": 42,
+      "total_images": 2594,
+      "train_count": 2075,
+      "val_count": 519,
+      "train_percentage": 79.99,
+      "val_percentage": 20.01,
+      "train_val_overlap": 0
+    },
+    "license": "CC0: Public Domain",
+    "leakage_risk": "Zero overlap between train (2075) and val (519) in manifest"
+  },
+  "sddi": {
+    "dataset_name": "sDDI (Diverse Dermatology Images - Segmentation Masks)",
+    "source": "Carrion et al., MICCAI 2023 (hectorcarrion/fedd)",
+    "license_masks": "MIT License",
+    "license_images": "DDI Stanford Research Use Agreement (ddi-dataset.github.io)",
+    "image_availability_note": "Masks available locally; raw RGB clinical images require signed DDI agreement",
+    "leakage_verification": {
+      "test_internal_disjoint": true,
+      "adaptation_test_disjoint": true,
+      "overlap_adaptation_test_count": 0,
+      "total_test_masks": 198,
+      "total_adaptation_train_masks": 60,
+      "total_adaptation_val_masks": 15
+    },
+    "splits_summary": {
+      "test_light": {
+        "count": 59,
+        "classes_found": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "marker_frequency": 0.7119,
+        "ruler_frequency": 0.6949,
+        "lesion_area_fraction": {
+          "mean": 0.011213399596133475,
+          "std": 0.016386913616196794,
+          "min": 0.0004730224609375,
+          "median": 0.0038909912109375,
+          "max": 0.0703887939453125
+        }
+      },
+      "test_med": {
+        "count": 80,
+        "classes_found": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "marker_frequency": 0.5375,
+        "ruler_frequency": 0.7125,
+        "lesion_area_fraction": {
+          "mean": 0.014566993713378907,
+          "std": 0.03066932021761174,
+          "min": 0.000244140625,
+          "median": 0.00746917724609375,
+          "max": 0.2298126220703125
+        }
+      },
+      "test_dark": {
+        "count": 59,
+        "classes_found": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "marker_frequency": 0.5424,
+        "ruler_frequency": 0.5424,
+        "lesion_area_fraction": {
+          "mean": 0.024529925847457626,
+          "std": 0.04653321180899059,
+          "min": 0.0004425048828125,
+          "median": 0.0074005126953125,
+          "max": 0.2645111083984375
+        }
+      },
+      "training_10_percent_train": {
+        "count": 60,
+        "classes_found": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "marker_frequency": 0.65,
+        "ruler_frequency": 0.7333,
+        "lesion_area_fraction": {
+          "mean": 0.013544464111328125,
+          "std": 0.017870979018833236,
+          "min": 0.0007171630859375,
+          "median": 0.00601959228515625,
+          "max": 0.082275390625
+        }
+      },
+      "training_10_percent_val": {
+        "count": 15,
+        "classes_found": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "marker_frequency": 0.6667,
+        "ruler_frequency": 0.6,
+        "lesion_area_fraction": {
+          "mean": 0.007294718424479167,
+          "std": 0.006458989636852561,
+          "min": 0.0008087158203125,
+          "median": 0.0049285888671875,
+          "max": 0.0243682861328125
+        }
+      }
+    }
+  }
+}

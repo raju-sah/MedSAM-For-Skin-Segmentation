@@ -1,0 +1,8 @@
+dataset,split_or_subset,count,mask_format,mean_lesion_area_frac,license,status
+ISIC 2018 Task 1,Train (80%),2075,"PNG binary (0, 255)",0.214,CC0: Public Domain,Verified & Manifest Created
+ISIC 2018 Task 1,Val (20%),519,"PNG binary (0, 255)",0.214,CC0: Public Domain,Verified & Manifest Created
+sDDI (FEDD / Stanford DDI),test_light,59,NPY int32 multi-class (0-4),0.0112,Masks: MIT | Images: Stanford DDI Agreement,"Verified (Masks local, Images require registration)"
+sDDI (FEDD / Stanford DDI),test_med,80,NPY int32 multi-class (0-4),0.0146,Masks: MIT | Images: Stanford DDI Agreement,"Verified (Masks local, Images require registration)"
+sDDI (FEDD / Stanford DDI),test_dark,59,NPY int32 multi-class (0-4),0.0245,Masks: MIT | Images: Stanford DDI Agreement,"Verified (Masks local, Images require registration)"
+sDDI (FEDD / Stanford DDI),training_10_percent_train,60,NPY int32 multi-class (0-4),0.0135,Masks: MIT | Images: Stanford DDI Agreement,"Verified (Masks local, Images require registration)"
+sDDI (FEDD / Stanford DDI),training_10_percent_val,15,NPY int32 multi-class (0-4),0.0073,Masks: MIT | Images: Stanford DDI Agreement,"Verified (Masks local, Images require registration)"

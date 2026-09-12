@@ -1,0 +1,132 @@
+[
+  {
+    "sample_id": "ISIC_0000000",
+    "source": "ISIC 2018 Task 1 Sample",
+    "image_dimensions": [
+      767,
+      1022
+    ],
+    "bbox": [
+      49,
+      46,
+      901,
+      636
+    ],
+    "lesion_area_fraction": 0.4697,
+    "core_lesion_purity": 1.0,
+    "skin_proxy_purity": 1.0,
+    "lesion_spillover": 0.0,
+    "delta_ita": 217.3649,
+    "delta_l": 64.8926,
+    "delta_e_ab": 68.845,
+    "core_median_ita": -92.9185,
+    "skin_median_ita": 124.4465,
+    "core_valid_pixels": 123148,
+    "skin_valid_pixels": 277622,
+    "is_valid": true
+  },
+  {
+    "sample_id": "Synthetic_FST_I_Light",
+    "source": "Synthetic Multi-Tone Audit (I-II)",
+    "image_dimensions": [
+      256,
+      256
+    ],
+    "bbox": [
+      80,
+      80,
+      180,
+      180
+    ],
+    "lesion_area_fraction": 0.1526,
+    "core_lesion_purity": 1.0,
+    "skin_proxy_purity": 1.0,
+    "lesion_spillover": 0.0,
+    "delta_ita": 137.042,
+    "delta_l": 65.1184,
+    "delta_e_ab": 65.4747,
+    "core_median_ita": -65.3036,
+    "skin_median_ita": 71.7384,
+    "core_valid_pixels": 2500,
+    "skin_valid_pixels": 12500,
+    "is_valid": true
+  },
+  {
+    "sample_id": "Synthetic_FST_III_Medium",
+    "source": "Synthetic Multi-Tone Audit (III-IV)",
+    "image_dimensions": [
+      256,
+      256
+    ],
+    "bbox": [
+      80,
+      80,
+      180,
+      180
+    ],
+    "lesion_area_fraction": 0.1526,
+    "core_lesion_purity": 1.0,
+    "skin_proxy_purity": 1.0,
+    "lesion_spillover": 0.0,
+    "delta_ita": 110.3746,
+    "delta_l": 47.5708,
+    "delta_e_ab": 48.6257,
+    "core_median_ita": -68.9135,
+    "skin_median_ita": 41.4611,
+    "core_valid_pixels": 2500,
+    "skin_valid_pixels": 12500,
+    "is_valid": true
+  },
+  {
+    "sample_id": "Synthetic_FST_VI_Dark",
+    "source": "Synthetic Multi-Tone Audit (V-VI)",
+    "image_dimensions": [
+      256,
+      256
+    ],
+    "bbox": [
+      80,
+      80,
+      180,
+      180
+    ],
+    "lesion_area_fraction": 0.1526,
+    "core_lesion_purity": 1.0,
+    "skin_proxy_purity": 1.0,
+    "lesion_spillover": 0.0,
+    "delta_ita": 22.326,
+    "delta_l": 17.1326,
+    "delta_e_ab": 18.7714,
+    "core_median_ita": -81.0976,
+    "skin_median_ita": -58.7717,
+    "core_valid_pixels": 2500,
+    "skin_valid_pixels": 12500,
+    "is_valid": true
+  },
+  {
+    "sample_id": "Synthetic_FST_VI_LowContrast",
+    "source": "Synthetic Multi-Tone Audit (V-VI)",
+    "image_dimensions": [
+      256,
+      256
+    ],
+    "bbox": [
+      80,
+      80,
+      180,
+      180
+    ],
+    "lesion_area_fraction": 0.1526,
+    "core_lesion_purity": 1.0,
+    "skin_proxy_purity": 1.0,
+    "lesion_spillover": 0.0,
+    "delta_ita": 6.7031,
+    "delta_l": 6.4331,
+    "delta_e_ab": 6.9102,
+    "core_median_ita": -78.5722,
+    "skin_median_ita": -71.8691,
+    "core_valid_pixels": 2500,
+    "skin_valid_pixels": 12500,
+    "is_valid": true
+  }
+]
