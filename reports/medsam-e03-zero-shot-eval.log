@@ -1,0 +1,27 @@
+[{"stream_name":"stdout","time":22.294140614,"data":"=== KAGGLE RUNNER: MedSAM ZERO-SHOT EVALUATION ===\n"}
+,{"stream_name":"stdout","time":22.552175301,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":36.596455996,"data":"Found MedSAM checkpoint: /kaggle/input/datasets/vinuchandrang/medsam-weights/medsam_vit_b.pth\n"}
+,{"stream_name":"stdout","time":40.541481744,"data":"MedSAM loaded successfully.\n"}
+,{"stream_name":"stdout","time":40.776751758,"data":"Found 2594 ISIC ground truth masks.\n"}
+,{"stream_name":"stdout","time":40.799527184,"data":"ISIC Image directory: /kaggle/input/datasets/tschandl/isic2018-challenge-task1-data-segmentation/ISIC2018_Task1-2_Training_Input\n"}
+,{"stream_name":"stdout","time":40.799552171,"data":"Evaluating validation subset of 519 images across prompt perturbations...\n"}
+,{"stream_name":"stdout","time":152.728910026,"data":"[50/519] elapsed: 111.9s\n"}
+,{"stream_name":"stdout","time":354.482322435,"data":"[100/519] elapsed: 313.7s\n"}
+,{"stream_name":"stdout","time":635.284449803,"data":"[150/519] elapsed: 594.5s\n"}
+,{"stream_name":"stdout","time":715.12646471,"data":"[200/519] elapsed: 674.3s\n"}
+,{"stream_name":"stdout","time":788.252671964,"data":"[250/519] elapsed: 747.5s\n"}
+,{"stream_name":"stdout","time":845.278729039,"data":"[300/519] elapsed: 804.5s\n"}
+,{"stream_name":"stdout","time":1255.386653152,"data":"[350/519] elapsed: 1214.6s\n"}
+,{"stream_name":"stdout","time":1642.867247855,"data":"[400/519] elapsed: 1602.1s\n"}
+,{"stream_name":"stdout","time":1770.551573167,"data":"[450/519] elapsed: 1729.8s\n"}
+,{"stream_name":"stdout","time":2434.040276522,"data":"[500/519] elapsed: 2393.2s\n"}
+,{"stream_name":"stdout","time":2643.250245209,"data":"Saved 5190 evaluation records to: /kaggle/working/e03_zero_shot_results.csv\n"}
+,{"stream_name":"stdout","time":2643.280983137,"data":"Saved report to: /kaggle/working/e03_zero_shot_report.md\n"}
+,{"stream_name":"stdout","time":2643.281003685,"data":"Execution complete.\n"}
+,{"stream_name":"stderr","time":2650.367250336,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2650.367318357,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2650.798213756,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2650.798241696,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2651.643905781,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2653.334555595,"data":"[NbConvertApp] Writing 328238 bytes to __results__.html\n"}
+]

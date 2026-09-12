@@ -1,0 +1,19 @@
+{
+  "id": "rajucode/medsam-e03-zero-shot-eval",
+  "title": "MedSAM E03 Zero-Shot Eval",
+  "code_file": "run_e03_kaggle.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [
+    "tschandl/isic2018-challenge-task1-data-segmentation",
+    "vinuchandrang/medsam-weights"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
