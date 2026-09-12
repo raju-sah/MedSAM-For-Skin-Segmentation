@@ -1,0 +1,18 @@
+% Table 1: In-Domain Dermoscopic Segmentation & Prompt Robustness
+\begin{table*}[t]
+\centering
+\caption{Comparison of parameter-efficient adaptation strategies on the ISIC 2018 dermoscopic benchmark across clean ($\delta=0.0$) and perturbed bounding-box prompts ($\delta \in \{0.05, 0.10, 0.20\}$).}
+\label{tab:peft_comparison}
+\small
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Model Architecture} & \textbf{Trainable Params} & \textbf{Param (\%)} & \textbf{Clean Dice} & \textbf{5\% Jitter} & \textbf{20\% Jitter} & \textbf{Drop ($\Delta$Dice)} \\
+\hline
+Zero-Shot MedSAM (E03) & 0 & 0.00\% & 0.9302 & 0.9186 & 0.7969 & -0.1333 \\
+Decoder-Only (E04) & 4,058,340 & 4.33\% & 0.9524 & 0.9460 & 0.8980 & -0.0544 \\
+LoRA (r=16, E05) & 4,648,164 & 4.93\% & 0.9609 & 0.9559 & 0.9282 & -0.0327 \\
+Standard Adapter (r=16, E06) & 4,362,660 & 4.64\% & 0.9633 & 0.9599 & 0.9296 & -0.0337 \\
+\textbf{CG-Adapter (Ours, E07)} & 4,363,824 & 4.64\% & 0.9638 & 0.9608 & 0.9323 & -0.0315 \\
+\hline
+\end{tabular}
+\end{table*}

@@ -1,0 +1,256 @@
+[{"stream_name":"stdout","time":11.233807245,"data":"=== KAGGLE COMPARATIVE PEFT BENCHMARK RUNNER ===\n"}
+,{"stream_name":"stdout","time":11.49488389,"data":"Device: cuda\n"}
+,{"stream_name":"stdout","time":25.471598234,"data":"Checkpoint: /kaggle/input/datasets/vinuchandrang/medsam-weights/medsam_vit_b.pth\n"}
+,{"stream_name":"stdout","time":25.499557898,"data":"Total masks found: 2594\n"}
+,{"stream_name":"stdout","time":25.523429621,"data":"Train samples: 2075 | Val samples: 519\n"}
+,{"stream_name":"stdout","time":25.523764003,"data":"\n"}
+,{"stream_name":"stdout","time":25.523775485,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":25.523780575,"data":"STARTING TRAINING: DECODER_ONLY\n"}
+,{"stream_name":"stdout","time":25.523785236,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":28.882627109,"data":"Model: decoder_only | Trainable Params: 4,058,340 / 93,735,472 (4.33%)\n"}
+,{"stream_name":"stdout","time":54.228262698,"data":"[DECODER_ONLY | Epoch 1/3] Step 100/2075 | Loss: 0.2633 | Elapsed: 25.3s\n"}
+,{"stream_name":"stdout","time":79.146521848,"data":"[DECODER_ONLY | Epoch 1/3] Step 200/2075 | Loss: 0.2354 | Elapsed: 50.3s\n"}
+,{"stream_name":"stdout","time":102.980634902,"data":"[DECODER_ONLY | Epoch 1/3] Step 300/2075 | Loss: 0.2181 | Elapsed: 74.1s\n"}
+,{"stream_name":"stdout","time":129.736649437,"data":"[DECODER_ONLY | Epoch 1/3] Step 400/2075 | Loss: 0.2052 | Elapsed: 100.9s\n"}
+,{"stream_name":"stdout","time":154.304510916,"data":"[DECODER_ONLY | Epoch 1/3] Step 500/2075 | Loss: 0.2003 | Elapsed: 125.4s\n"}
+,{"stream_name":"stdout","time":178.4392576,"data":"[DECODER_ONLY | Epoch 1/3] Step 600/2075 | Loss: 0.2023 | Elapsed: 149.6s\n"}
+,{"stream_name":"stdout","time":202.072410456,"data":"[DECODER_ONLY | Epoch 1/3] Step 700/2075 | Loss: 0.1952 | Elapsed: 173.2s\n"}
+,{"stream_name":"stdout","time":227.062344386,"data":"[DECODER_ONLY | Epoch 1/3] Step 800/2075 | Loss: 0.1949 | Elapsed: 198.2s\n"}
+,{"stream_name":"stdout","time":250.959429703,"data":"[DECODER_ONLY | Epoch 1/3] Step 900/2075 | Loss: 0.1927 | Elapsed: 222.1s\n"}
+,{"stream_name":"stdout","time":275.564819147,"data":"[DECODER_ONLY | Epoch 1/3] Step 1000/2075 | Loss: 0.1906 | Elapsed: 246.7s\n"}
+,{"stream_name":"stdout","time":299.778226754,"data":"[DECODER_ONLY | Epoch 1/3] Step 1100/2075 | Loss: 0.1909 | Elapsed: 270.9s\n"}
+,{"stream_name":"stdout","time":324.672536043,"data":"[DECODER_ONLY | Epoch 1/3] Step 1200/2075 | Loss: 0.1911 | Elapsed: 295.8s\n"}
+,{"stream_name":"stdout","time":348.644821555,"data":"[DECODER_ONLY | Epoch 1/3] Step 1300/2075 | Loss: 0.1939 | Elapsed: 319.8s\n"}
+,{"stream_name":"stdout","time":373.839773815,"data":"[DECODER_ONLY | Epoch 1/3] Step 1400/2075 | Loss: 0.1922 | Elapsed: 345.0s\n"}
+,{"stream_name":"stdout","time":398.842882725,"data":"[DECODER_ONLY | Epoch 1/3] Step 1500/2075 | Loss: 0.1913 | Elapsed: 370.0s\n"}
+,{"stream_name":"stdout","time":423.669742093,"data":"[DECODER_ONLY | Epoch 1/3] Step 1600/2075 | Loss: 0.1910 | Elapsed: 394.8s\n"}
+,{"stream_name":"stdout","time":447.678338806,"data":"[DECODER_ONLY | Epoch 1/3] Step 1700/2075 | Loss: 0.1885 | Elapsed: 418.8s\n"}
+,{"stream_name":"stdout","time":472.109059946,"data":"[DECODER_ONLY | Epoch 1/3] Step 1800/2075 | Loss: 0.1883 | Elapsed: 443.2s\n"}
+,{"stream_name":"stdout","time":497.020059457,"data":"[DECODER_ONLY | Epoch 1/3] Step 1900/2075 | Loss: 0.1891 | Elapsed: 468.1s\n"}
+,{"stream_name":"stdout","time":522.79172166,"data":"[DECODER_ONLY | Epoch 1/3] Step 2000/2075 | Loss: 0.1878 | Elapsed: 493.9s\n"}
+,{"stream_name":"stdout","time":540.927554666,"data":"[DECODER_ONLY | Epoch 1/3] Step 2075/2075 | Loss: 0.1875 | Elapsed: 512.0s\n"}
+,{"stream_name":"stdout","time":660.46728811,"data":"--\u003e [DECODER_ONLY Epoch 1] Val Dice: 0.9429\n"}
+,{"stream_name":"stdout","time":660.504452164,"data":"    Saved best checkpoint: /kaggle/working/best_decoder_only_model.pth\n"}
+,{"stream_name":"stdout","time":685.797450093,"data":"[DECODER_ONLY | Epoch 2/3] Step 100/2075 | Loss: 0.1612 | Elapsed: 25.3s\n"}
+,{"stream_name":"stdout","time":709.772353418,"data":"[DECODER_ONLY | Epoch 2/3] Step 200/2075 | Loss: 0.1618 | Elapsed: 49.3s\n"}
+,{"stream_name":"stdout","time":734.110941652,"data":"[DECODER_ONLY | Epoch 2/3] Step 300/2075 | Loss: 0.1610 | Elapsed: 73.6s\n"}
+,{"stream_name":"stdout","time":759.273239653,"data":"[DECODER_ONLY | Epoch 2/3] Step 400/2075 | Loss: 0.1623 | Elapsed: 98.8s\n"}
+,{"stream_name":"stdout","time":784.883307201,"data":"[DECODER_ONLY | Epoch 2/3] Step 500/2075 | Loss: 0.1655 | Elapsed: 124.4s\n"}
+,{"stream_name":"stdout","time":809.41997272,"data":"[DECODER_ONLY | Epoch 2/3] Step 600/2075 | Loss: 0.1702 | Elapsed: 148.9s\n"}
+,{"stream_name":"stdout","time":834.217676351,"data":"[DECODER_ONLY | Epoch 2/3] Step 700/2075 | Loss: 0.1715 | Elapsed: 173.7s\n"}
+,{"stream_name":"stdout","time":858.036923323,"data":"[DECODER_ONLY | Epoch 2/3] Step 800/2075 | Loss: 0.1729 | Elapsed: 197.5s\n"}
+,{"stream_name":"stdout","time":882.641992096,"data":"[DECODER_ONLY | Epoch 2/3] Step 900/2075 | Loss: 0.1717 | Elapsed: 222.1s\n"}
+,{"stream_name":"stdout","time":907.999689486,"data":"[DECODER_ONLY | Epoch 2/3] Step 1000/2075 | Loss: 0.1694 | Elapsed: 247.5s\n"}
+,{"stream_name":"stdout","time":931.755743016,"data":"[DECODER_ONLY | Epoch 2/3] Step 1100/2075 | Loss: 0.1735 | Elapsed: 271.3s\n"}
+,{"stream_name":"stdout","time":956.389744763,"data":"[DECODER_ONLY | Epoch 2/3] Step 1200/2075 | Loss: 0.1723 | Elapsed: 295.9s\n"}
+,{"stream_name":"stdout","time":981.577746302,"data":"[DECODER_ONLY | Epoch 2/3] Step 1300/2075 | Loss: 0.1711 | Elapsed: 321.1s\n"}
+,{"stream_name":"stdout","time":1006.795602634,"data":"[DECODER_ONLY | Epoch 2/3] Step 1400/2075 | Loss: 0.1711 | Elapsed: 346.3s\n"}
+,{"stream_name":"stdout","time":1031.34949321,"data":"[DECODER_ONLY | Epoch 2/3] Step 1500/2075 | Loss: 0.1708 | Elapsed: 370.8s\n"}
+,{"stream_name":"stdout","time":1056.360126699,"data":"[DECODER_ONLY | Epoch 2/3] Step 1600/2075 | Loss: 0.1700 | Elapsed: 395.9s\n"}
+,{"stream_name":"stdout","time":1080.837296344,"data":"[DECODER_ONLY | Epoch 2/3] Step 1700/2075 | Loss: 0.1694 | Elapsed: 420.3s\n"}
+,{"stream_name":"stdout","time":1105.982110365,"data":"[DECODER_ONLY | Epoch 2/3] Step 1800/2075 | Loss: 0.1680 | Elapsed: 445.5s\n"}
+,{"stream_name":"stdout","time":1130.902471753,"data":"[DECODER_ONLY | Epoch 2/3] Step 1900/2075 | Loss: 0.1668 | Elapsed: 470.4s\n"}
+,{"stream_name":"stdout","time":1155.58166312,"data":"[DECODER_ONLY | Epoch 2/3] Step 2000/2075 | Loss: 0.1661 | Elapsed: 495.1s\n"}
+,{"stream_name":"stdout","time":1174.030762994,"data":"[DECODER_ONLY | Epoch 2/3] Step 2075/2075 | Loss: 0.1658 | Elapsed: 513.5s\n"}
+,{"stream_name":"stdout","time":1292.902429251,"data":"--\u003e [DECODER_ONLY Epoch 2] Val Dice: 0.9473\n"}
+,{"stream_name":"stdout","time":1292.948103515,"data":"    Saved best checkpoint: /kaggle/working/best_decoder_only_model.pth\n"}
+,{"stream_name":"stdout","time":1318.531581568,"data":"[DECODER_ONLY | Epoch 3/3] Step 100/2075 | Loss: 0.1694 | Elapsed: 25.6s\n"}
+,{"stream_name":"stdout","time":1342.495552473,"data":"[DECODER_ONLY | Epoch 3/3] Step 200/2075 | Loss: 0.1601 | Elapsed: 49.5s\n"}
+,{"stream_name":"stdout","time":1368.416591856,"data":"[DECODER_ONLY | Epoch 3/3] Step 300/2075 | Loss: 0.1658 | Elapsed: 75.5s\n"}
+,{"stream_name":"stdout","time":1393.003743154,"data":"[DECODER_ONLY | Epoch 3/3] Step 400/2075 | Loss: 0.1551 | Elapsed: 100.1s\n"}
+,{"stream_name":"stdout","time":1418.599665672,"data":"[DECODER_ONLY | Epoch 3/3] Step 500/2075 | Loss: 0.1525 | Elapsed: 125.7s\n"}
+,{"stream_name":"stdout","time":1442.671409175,"data":"[DECODER_ONLY | Epoch 3/3] Step 600/2075 | Loss: 0.1530 | Elapsed: 149.7s\n"}
+,{"stream_name":"stdout","time":1467.614160821,"data":"[DECODER_ONLY | Epoch 3/3] Step 700/2075 | Loss: 0.1546 | Elapsed: 174.7s\n"}
+,{"stream_name":"stdout","time":1492.772241176,"data":"[DECODER_ONLY | Epoch 3/3] Step 800/2075 | Loss: 0.1558 | Elapsed: 199.8s\n"}
+,{"stream_name":"stdout","time":1516.865730687,"data":"[DECODER_ONLY | Epoch 3/3] Step 900/2075 | Loss: 0.1570 | Elapsed: 223.9s\n"}
+,{"stream_name":"stdout","time":1541.371671141,"data":"[DECODER_ONLY | Epoch 3/3] Step 1000/2075 | Loss: 0.1572 | Elapsed: 248.4s\n"}
+,{"stream_name":"stdout","time":1566.331925827,"data":"[DECODER_ONLY | Epoch 3/3] Step 1100/2075 | Loss: 0.1555 | Elapsed: 273.4s\n"}
+,{"stream_name":"stdout","time":1591.355653352,"data":"[DECODER_ONLY | Epoch 3/3] Step 1200/2075 | Loss: 0.1563 | Elapsed: 298.4s\n"}
+,{"stream_name":"stdout","time":1616.47598677,"data":"[DECODER_ONLY | Epoch 3/3] Step 1300/2075 | Loss: 0.1547 | Elapsed: 323.5s\n"}
+,{"stream_name":"stdout","time":1641.718121643,"data":"[DECODER_ONLY | Epoch 3/3] Step 1400/2075 | Loss: 0.1536 | Elapsed: 348.8s\n"}
+,{"stream_name":"stdout","time":1666.288596057,"data":"[DECODER_ONLY | Epoch 3/3] Step 1500/2075 | Loss: 0.1574 | Elapsed: 373.3s\n"}
+,{"stream_name":"stdout","time":1690.662382041,"data":"[DECODER_ONLY | Epoch 3/3] Step 1600/2075 | Loss: 0.1585 | Elapsed: 397.7s\n"}
+,{"stream_name":"stdout","time":1715.124194391,"data":"[DECODER_ONLY | Epoch 3/3] Step 1700/2075 | Loss: 0.1585 | Elapsed: 422.2s\n"}
+,{"stream_name":"stdout","time":1739.401574072,"data":"[DECODER_ONLY | Epoch 3/3] Step 1800/2075 | Loss: 0.1579 | Elapsed: 446.5s\n"}
+,{"stream_name":"stdout","time":1764.220988965,"data":"[DECODER_ONLY | Epoch 3/3] Step 1900/2075 | Loss: 0.1579 | Elapsed: 471.3s\n"}
+,{"stream_name":"stdout","time":1788.609580596,"data":"[DECODER_ONLY | Epoch 3/3] Step 2000/2075 | Loss: 0.1570 | Elapsed: 495.7s\n"}
+,{"stream_name":"stdout","time":1808.226521886,"data":"[DECODER_ONLY | Epoch 3/3] Step 2075/2075 | Loss: 0.1572 | Elapsed: 515.3s\n"}
+,{"stream_name":"stdout","time":1927.124467223,"data":"--\u003e [DECODER_ONLY Epoch 3] Val Dice: 0.9490\n"}
+,{"stream_name":"stdout","time":1927.168112104,"data":"    Saved best checkpoint: /kaggle/working/best_decoder_only_model.pth\n"}
+,{"stream_name":"stdout","time":1927.168141489,"data":"\n"}
+,{"stream_name":"stdout","time":1927.168152763,"data":"--- Running Robustness Evaluation for DECODER_ONLY ---\n"}
+,{"stream_name":"stdout","time":1980.782000915,"data":"    Delta = 0.00 | Dice: 0.9524 | IoU: 0.9106\n"}
+,{"stream_name":"stdout","time":2034.321497005,"data":"    Delta = 0.05 | Dice: 0.946 | IoU: 0.8996\n"}
+,{"stream_name":"stdout","time":2087.223883415,"data":"    Delta = 0.10 | Dice: 0.9397 | IoU: 0.8879\n"}
+,{"stream_name":"stdout","time":2140.421914445,"data":"    Delta = 0.20 | Dice: 0.898 | IoU: 0.8199\n"}
+,{"stream_name":"stdout","time":2140.503602976,"data":"\n"}
+,{"stream_name":"stdout","time":2140.503632653,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":2140.503638739,"data":"STARTING TRAINING: LORA\n"}
+,{"stream_name":"stdout","time":2140.503643534,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":2141.684530342,"data":"Model: lora | Trainable Params: 4,648,164 / 94,325,296 (4.93%)\n"}
+,{"stream_name":"stdout","time":2193.882311102,"data":"[LORA | Epoch 1/3] Step 100/2075 | Loss: 0.2312 | Elapsed: 52.2s\n"}
+,{"stream_name":"stdout","time":2245.924772443,"data":"[LORA | Epoch 1/3] Step 200/2075 | Loss: 0.2151 | Elapsed: 104.2s\n"}
+,{"stream_name":"stdout","time":2297.914429549,"data":"[LORA | Epoch 1/3] Step 300/2075 | Loss: 0.1967 | Elapsed: 156.2s\n"}
+,{"stream_name":"stdout","time":2350.337983014,"data":"[LORA | Epoch 1/3] Step 400/2075 | Loss: 0.1858 | Elapsed: 208.7s\n"}
+,{"stream_name":"stdout","time":2402.221587555,"data":"[LORA | Epoch 1/3] Step 500/2075 | Loss: 0.1853 | Elapsed: 260.5s\n"}
+,{"stream_name":"stdout","time":2454.460544717,"data":"[LORA | Epoch 1/3] Step 600/2075 | Loss: 0.1859 | Elapsed: 312.8s\n"}
+,{"stream_name":"stdout","time":2506.203924138,"data":"[LORA | Epoch 1/3] Step 700/2075 | Loss: 0.1852 | Elapsed: 364.5s\n"}
+,{"stream_name":"stdout","time":2558.390232429,"data":"[LORA | Epoch 1/3] Step 800/2075 | Loss: 0.1910 | Elapsed: 416.7s\n"}
+,{"stream_name":"stdout","time":2610.211274789,"data":"[LORA | Epoch 1/3] Step 900/2075 | Loss: 0.1862 | Elapsed: 468.5s\n"}
+,{"stream_name":"stdout","time":2662.741485237,"data":"[LORA | Epoch 1/3] Step 1000/2075 | Loss: 0.1825 | Elapsed: 521.1s\n"}
+,{"stream_name":"stdout","time":2714.106982444,"data":"[LORA | Epoch 1/3] Step 1100/2075 | Loss: 0.1811 | Elapsed: 572.4s\n"}
+,{"stream_name":"stdout","time":2766.074244088,"data":"[LORA | Epoch 1/3] Step 1200/2075 | Loss: 0.1784 | Elapsed: 624.4s\n"}
+,{"stream_name":"stdout","time":2817.699240517,"data":"[LORA | Epoch 1/3] Step 1300/2075 | Loss: 0.1772 | Elapsed: 676.0s\n"}
+,{"stream_name":"stdout","time":2869.835159871,"data":"[LORA | Epoch 1/3] Step 1400/2075 | Loss: 0.1764 | Elapsed: 728.1s\n"}
+,{"stream_name":"stdout","time":2921.279602539,"data":"[LORA | Epoch 1/3] Step 1500/2075 | Loss: 0.1733 | Elapsed: 779.6s\n"}
+,{"stream_name":"stdout","time":2973.464200189,"data":"[LORA | Epoch 1/3] Step 1600/2075 | Loss: 0.1713 | Elapsed: 831.8s\n"}
+,{"stream_name":"stdout","time":3025.566494135,"data":"[LORA | Epoch 1/3] Step 1700/2075 | Loss: 0.1691 | Elapsed: 883.9s\n"}
+,{"stream_name":"stdout","time":3077.996507259,"data":"[LORA | Epoch 1/3] Step 1800/2075 | Loss: 0.1680 | Elapsed: 936.3s\n"}
+,{"stream_name":"stdout","time":3129.584475544,"data":"[LORA | Epoch 1/3] Step 1900/2075 | Loss: 0.1657 | Elapsed: 987.9s\n"}
+,{"stream_name":"stdout","time":3181.64056803,"data":"[LORA | Epoch 1/3] Step 2000/2075 | Loss: 0.1641 | Elapsed: 1040.0s\n"}
+,{"stream_name":"stdout","time":3220.756182444,"data":"[LORA | Epoch 1/3] Step 2075/2075 | Loss: 0.1632 | Elapsed: 1079.1s\n"}
+,{"stream_name":"stdout","time":3344.072114937,"data":"--\u003e [LORA Epoch 1] Val Dice: 0.9547\n"}
+,{"stream_name":"stdout","time":3344.233751732,"data":"    Saved best checkpoint: /kaggle/working/best_lora_model.pth\n"}
+,{"stream_name":"stdout","time":3397.248132986,"data":"[LORA | Epoch 2/3] Step 100/2075 | Loss: 0.1585 | Elapsed: 53.0s\n"}
+,{"stream_name":"stdout","time":3449.371322211,"data":"[LORA | Epoch 2/3] Step 200/2075 | Loss: 0.1477 | Elapsed: 105.1s\n"}
+,{"stream_name":"stdout","time":3501.310379604,"data":"[LORA | Epoch 2/3] Step 300/2075 | Loss: 0.1388 | Elapsed: 157.1s\n"}
+,{"stream_name":"stdout","time":3553.240065486,"data":"[LORA | Epoch 2/3] Step 400/2075 | Loss: 0.1341 | Elapsed: 209.0s\n"}
+,{"stream_name":"stdout","time":3604.913151767,"data":"[LORA | Epoch 2/3] Step 500/2075 | Loss: 0.1329 | Elapsed: 260.7s\n"}
+,{"stream_name":"stdout","time":3657.081129427,"data":"[LORA | Epoch 2/3] Step 600/2075 | Loss: 0.1332 | Elapsed: 312.8s\n"}
+,{"stream_name":"stdout","time":3708.819312183,"data":"[LORA | Epoch 2/3] Step 700/2075 | Loss: 0.1306 | Elapsed: 364.6s\n"}
+,{"stream_name":"stdout","time":3761.153631953,"data":"[LORA | Epoch 2/3] Step 800/2075 | Loss: 0.1327 | Elapsed: 416.9s\n"}
+,{"stream_name":"stdout","time":3812.893736209,"data":"[LORA | Epoch 2/3] Step 900/2075 | Loss: 0.1305 | Elapsed: 468.7s\n"}
+,{"stream_name":"stdout","time":3865.324253055,"data":"[LORA | Epoch 2/3] Step 1000/2075 | Loss: 0.1301 | Elapsed: 521.1s\n"}
+,{"stream_name":"stdout","time":3917.369670722,"data":"[LORA | Epoch 2/3] Step 1100/2075 | Loss: 0.1303 | Elapsed: 573.1s\n"}
+,{"stream_name":"stdout","time":3969.362556539,"data":"[LORA | Epoch 2/3] Step 1200/2075 | Loss: 0.1289 | Elapsed: 625.1s\n"}
+,{"stream_name":"stdout","time":4020.75052501,"data":"[LORA | Epoch 2/3] Step 1300/2075 | Loss: 0.1341 | Elapsed: 676.5s\n"}
+,{"stream_name":"stdout","time":4073.105228512,"data":"[LORA | Epoch 2/3] Step 1400/2075 | Loss: 0.1332 | Elapsed: 728.9s\n"}
+,{"stream_name":"stdout","time":4125.051448691,"data":"[LORA | Epoch 2/3] Step 1500/2075 | Loss: 0.1323 | Elapsed: 780.8s\n"}
+,{"stream_name":"stdout","time":4177.274917788,"data":"[LORA | Epoch 2/3] Step 1600/2075 | Loss: 0.1319 | Elapsed: 833.0s\n"}
+,{"stream_name":"stdout","time":4228.9773831,"data":"[LORA | Epoch 2/3] Step 1700/2075 | Loss: 0.1311 | Elapsed: 884.7s\n"}
+,{"stream_name":"stdout","time":4281.273656952,"data":"[LORA | Epoch 2/3] Step 1800/2075 | Loss: 0.1310 | Elapsed: 937.0s\n"}
+,{"stream_name":"stdout","time":4333.328832806,"data":"[LORA | Epoch 2/3] Step 1900/2075 | Loss: 0.1308 | Elapsed: 989.1s\n"}
+,{"stream_name":"stdout","time":4385.808496801,"data":"[LORA | Epoch 2/3] Step 2000/2075 | Loss: 0.1303 | Elapsed: 1041.6s\n"}
+,{"stream_name":"stdout","time":4424.773768769,"data":"[LORA | Epoch 2/3] Step 2075/2075 | Loss: 0.1295 | Elapsed: 1080.5s\n"}
+,{"stream_name":"stdout","time":4547.825334095,"data":"--\u003e [LORA Epoch 2] Val Dice: 0.9566\n"}
+,{"stream_name":"stdout","time":4548.073160935,"data":"    Saved best checkpoint: /kaggle/working/best_lora_model.pth\n"}
+,{"stream_name":"stdout","time":4600.34072092,"data":"[LORA | Epoch 3/3] Step 100/2075 | Loss: 0.1163 | Elapsed: 52.3s\n"}
+,{"stream_name":"stdout","time":4652.69440902,"data":"[LORA | Epoch 3/3] Step 200/2075 | Loss: 0.1111 | Elapsed: 104.6s\n"}
+,{"stream_name":"stdout","time":4704.415502838,"data":"[LORA | Epoch 3/3] Step 300/2075 | Loss: 0.1104 | Elapsed: 156.3s\n"}
+,{"stream_name":"stdout","time":4756.982107109,"data":"[LORA | Epoch 3/3] Step 400/2075 | Loss: 0.1140 | Elapsed: 208.9s\n"}
+,{"stream_name":"stdout","time":4808.788130578,"data":"[LORA | Epoch 3/3] Step 500/2075 | Loss: 0.1153 | Elapsed: 260.7s\n"}
+,{"stream_name":"stdout","time":4860.819690141,"data":"[LORA | Epoch 3/3] Step 600/2075 | Loss: 0.1144 | Elapsed: 312.7s\n"}
+,{"stream_name":"stdout","time":4912.787655458,"data":"[LORA | Epoch 3/3] Step 700/2075 | Loss: 0.1150 | Elapsed: 364.7s\n"}
+,{"stream_name":"stdout","time":4965.207466246,"data":"[LORA | Epoch 3/3] Step 800/2075 | Loss: 0.1158 | Elapsed: 417.1s\n"}
+,{"stream_name":"stdout","time":5016.796824533,"data":"[LORA | Epoch 3/3] Step 900/2075 | Loss: 0.1166 | Elapsed: 468.7s\n"}
+,{"stream_name":"stdout","time":5068.877479177,"data":"[LORA | Epoch 3/3] Step 1000/2075 | Loss: 0.1175 | Elapsed: 520.8s\n"}
+,{"stream_name":"stdout","time":5120.588045576,"data":"[LORA | Epoch 3/3] Step 1100/2075 | Loss: 0.1163 | Elapsed: 572.5s\n"}
+,{"stream_name":"stdout","time":5172.719108716,"data":"[LORA | Epoch 3/3] Step 1200/2075 | Loss: 0.1159 | Elapsed: 624.6s\n"}
+,{"stream_name":"stdout","time":5223.844678611,"data":"[LORA | Epoch 3/3] Step 1300/2075 | Loss: 0.1165 | Elapsed: 675.8s\n"}
+,{"stream_name":"stdout","time":5276.209854416,"data":"[LORA | Epoch 3/3] Step 1400/2075 | Loss: 0.1169 | Elapsed: 728.1s\n"}
+,{"stream_name":"stdout","time":5327.668092915,"data":"[LORA | Epoch 3/3] Step 1500/2075 | Loss: 0.1168 | Elapsed: 779.6s\n"}
+,{"stream_name":"stdout","time":5379.720324916,"data":"[LORA | Epoch 3/3] Step 1600/2075 | Loss: 0.1166 | Elapsed: 831.6s\n"}
+,{"stream_name":"stdout","time":5431.402061351,"data":"[LORA | Epoch 3/3] Step 1700/2075 | Loss: 0.1160 | Elapsed: 883.3s\n"}
+,{"stream_name":"stdout","time":5483.730889049,"data":"[LORA | Epoch 3/3] Step 1800/2075 | Loss: 0.1151 | Elapsed: 935.7s\n"}
+,{"stream_name":"stdout","time":5535.688621711,"data":"[LORA | Epoch 3/3] Step 1900/2075 | Loss: 0.1182 | Elapsed: 987.6s\n"}
+,{"stream_name":"stdout","time":5588.014705916,"data":"[LORA | Epoch 3/3] Step 2000/2075 | Loss: 0.1190 | Elapsed: 1039.9s\n"}
+,{"stream_name":"stdout","time":5626.903810231,"data":"[LORA | Epoch 3/3] Step 2075/2075 | Loss: 0.1188 | Elapsed: 1078.8s\n"}
+,{"stream_name":"stdout","time":5751.063517374,"data":"--\u003e [LORA Epoch 3] Val Dice: 0.9588\n"}
+,{"stream_name":"stdout","time":5751.308353983,"data":"    Saved best checkpoint: /kaggle/working/best_lora_model.pth\n"}
+,{"stream_name":"stdout","time":5751.308382876,"data":"\n"}
+,{"stream_name":"stdout","time":5751.308387939,"data":"--- Running Robustness Evaluation for LORA ---\n"}
+,{"stream_name":"stdout","time":5806.336621462,"data":"    Delta = 0.00 | Dice: 0.9609 | IoU: 0.9258\n"}
+,{"stream_name":"stdout","time":5861.14911712,"data":"    Delta = 0.05 | Dice: 0.9559 | IoU: 0.9164\n"}
+,{"stream_name":"stdout","time":5915.99568097,"data":"    Delta = 0.10 | Dice: 0.9514 | IoU: 0.9084\n"}
+,{"stream_name":"stdout","time":5971.007932163,"data":"    Delta = 0.20 | Dice: 0.9282 | IoU: 0.87\n"}
+,{"stream_name":"stdout","time":5971.1136124,"data":"\n"}
+,{"stream_name":"stdout","time":5971.113645206,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":5971.113650644,"data":"STARTING TRAINING: STANDARD_ADAPTER\n"}
+,{"stream_name":"stdout","time":5971.113660008,"data":"=======================================================\n"}
+,{"stream_name":"stdout","time":5972.264628676,"data":"Model: standard_adapter | Trainable Params: 4,362,660 / 94,039,792 (4.64%)\n"}
+,{"stream_name":"stdout","time":6023.208121697,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 100/2075 | Loss: 0.2316 | Elapsed: 50.9s\n"}
+,{"stream_name":"stdout","time":6074.146763021,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 200/2075 | Loss: 0.2010 | Elapsed: 101.9s\n"}
+,{"stream_name":"stdout","time":6124.516878583,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 300/2075 | Loss: 0.2169 | Elapsed: 152.3s\n"}
+,{"stream_name":"stdout","time":6175.493427314,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 400/2075 | Loss: 0.2046 | Elapsed: 203.2s\n"}
+,{"stream_name":"stdout","time":6226.008435006,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 500/2075 | Loss: 0.1947 | Elapsed: 253.7s\n"}
+,{"stream_name":"stdout","time":6277.150850414,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 600/2075 | Loss: 0.1903 | Elapsed: 304.9s\n"}
+,{"stream_name":"stdout","time":6327.624794795,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 700/2075 | Loss: 0.1842 | Elapsed: 355.4s\n"}
+,{"stream_name":"stdout","time":6378.330597306,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 800/2075 | Loss: 0.1797 | Elapsed: 406.1s\n"}
+,{"stream_name":"stdout","time":6428.551520622,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 900/2075 | Loss: 0.1752 | Elapsed: 456.3s\n"}
+,{"stream_name":"stdout","time":6479.513808708,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1000/2075 | Loss: 0.1720 | Elapsed: 507.2s\n"}
+,{"stream_name":"stdout","time":6529.944070219,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1100/2075 | Loss: 0.1699 | Elapsed: 557.7s\n"}
+,{"stream_name":"stdout","time":6580.56582425,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1200/2075 | Loss: 0.1662 | Elapsed: 608.3s\n"}
+,{"stream_name":"stdout","time":6630.772976512,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1300/2075 | Loss: 0.1647 | Elapsed: 658.5s\n"}
+,{"stream_name":"stdout","time":6681.753923466,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1400/2075 | Loss: 0.1627 | Elapsed: 709.5s\n"}
+,{"stream_name":"stdout","time":6732.025623824,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1500/2075 | Loss: 0.1619 | Elapsed: 759.8s\n"}
+,{"stream_name":"stdout","time":6782.718594287,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1600/2075 | Loss: 0.1610 | Elapsed: 810.5s\n"}
+,{"stream_name":"stdout","time":6833.218749185,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1700/2075 | Loss: 0.1605 | Elapsed: 861.0s\n"}
+,{"stream_name":"stdout","time":6884.00274596,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1800/2075 | Loss: 0.1599 | Elapsed: 911.7s\n"}
+,{"stream_name":"stdout","time":6934.150437338,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 1900/2075 | Loss: 0.1585 | Elapsed: 961.9s\n"}
+,{"stream_name":"stdout","time":6984.746940343,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 2000/2075 | Loss: 0.1563 | Elapsed: 1012.5s\n"}
+,{"stream_name":"stdout","time":7022.88156935,"data":"[STANDARD_ADAPTER | Epoch 1/3] Step 2075/2075 | Loss: 0.1572 | Elapsed: 1050.6s\n"}
+,{"stream_name":"stdout","time":7145.232203137,"data":"--\u003e [STANDARD_ADAPTER Epoch 1] Val Dice: 0.9548\n"}
+,{"stream_name":"stdout","time":7145.270100559,"data":"    Saved best checkpoint: /kaggle/working/best_standard_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":7197.066278104,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 100/2075 | Loss: 0.1353 | Elapsed: 51.8s\n"}
+,{"stream_name":"stdout","time":7247.779219196,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 200/2075 | Loss: 0.1181 | Elapsed: 102.5s\n"}
+,{"stream_name":"stdout","time":7297.996222724,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 300/2075 | Loss: 0.1192 | Elapsed: 152.7s\n"}
+,{"stream_name":"stdout","time":7349.050607747,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 400/2075 | Loss: 0.1219 | Elapsed: 203.8s\n"}
+,{"stream_name":"stdout","time":7399.252761485,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 500/2075 | Loss: 0.1226 | Elapsed: 254.0s\n"}
+,{"stream_name":"stdout","time":7450.118601912,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 600/2075 | Loss: 0.1285 | Elapsed: 304.8s\n"}
+,{"stream_name":"stdout","time":7500.623659086,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 700/2075 | Loss: 0.1278 | Elapsed: 355.4s\n"}
+,{"stream_name":"stdout","time":7551.288454146,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 800/2075 | Loss: 0.1271 | Elapsed: 406.0s\n"}
+,{"stream_name":"stdout","time":7601.734832659,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 900/2075 | Loss: 0.1268 | Elapsed: 456.5s\n"}
+,{"stream_name":"stdout","time":7652.555385443,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1000/2075 | Loss: 0.1281 | Elapsed: 507.3s\n"}
+,{"stream_name":"stdout","time":7702.683085372,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1100/2075 | Loss: 0.1274 | Elapsed: 557.4s\n"}
+,{"stream_name":"stdout","time":7753.668910006,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1200/2075 | Loss: 0.1256 | Elapsed: 608.4s\n"}
+,{"stream_name":"stdout","time":7804.255897092,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1300/2075 | Loss: 0.1261 | Elapsed: 659.0s\n"}
+,{"stream_name":"stdout","time":7854.977681708,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1400/2075 | Loss: 0.1254 | Elapsed: 709.7s\n"}
+,{"stream_name":"stdout","time":7905.223208463,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1500/2075 | Loss: 0.1253 | Elapsed: 760.0s\n"}
+,{"stream_name":"stdout","time":7956.220150333,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1600/2075 | Loss: 0.1253 | Elapsed: 810.9s\n"}
+,{"stream_name":"stdout","time":8006.718921377,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1700/2075 | Loss: 0.1245 | Elapsed: 861.4s\n"}
+,{"stream_name":"stdout","time":8057.531159696,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1800/2075 | Loss: 0.1278 | Elapsed: 912.3s\n"}
+,{"stream_name":"stdout","time":8107.63766741,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 1900/2075 | Loss: 0.1268 | Elapsed: 962.4s\n"}
+,{"stream_name":"stdout","time":8158.414050676,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 2000/2075 | Loss: 0.1277 | Elapsed: 1013.1s\n"}
+,{"stream_name":"stdout","time":8196.527040351,"data":"[STANDARD_ADAPTER | Epoch 2/3] Step 2075/2075 | Loss: 0.1270 | Elapsed: 1051.3s\n"}
+,{"stream_name":"stdout","time":8318.573323209,"data":"--\u003e [STANDARD_ADAPTER Epoch 2] Val Dice: 0.9585\n"}
+,{"stream_name":"stdout","time":8318.626619144,"data":"    Saved best checkpoint: /kaggle/working/best_standard_adapter_model.pth\n"}
+,{"stream_name":"stdout","time":8369.456576604,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 100/2075 | Loss: 0.1147 | Elapsed: 50.8s\n"}
+,{"stream_name":"stdout","time":8420.411730026,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 200/2075 | Loss: 0.1055 | Elapsed: 101.8s\n"}
+,{"stream_name":"stdout","time":8470.746094443,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 300/2075 | Loss: 0.1095 | Elapsed: 152.1s\n"}
+,{"stream_name":"stdout","time":8521.466019529,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 400/2075 | Loss: 0.1131 | Elapsed: 202.8s\n"}
+,{"stream_name":"stdout","time":8571.940559988,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 500/2075 | Loss: 0.1161 | Elapsed: 253.3s\n"}
+,{"stream_name":"stdout","time":8622.546218547,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 600/2075 | Loss: 0.1138 | Elapsed: 303.9s\n"}
+,{"stream_name":"stdout","time":8672.735574978,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 700/2075 | Loss: 0.1170 | Elapsed: 354.1s\n"}
+,{"stream_name":"stdout","time":8723.295288973,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 800/2075 | Loss: 0.1220 | Elapsed: 404.7s\n"}
+,{"stream_name":"stdout","time":8773.586483955,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 900/2075 | Loss: 0.1218 | Elapsed: 455.0s\n"}
+,{"stream_name":"stdout","time":8824.541103422,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1000/2075 | Loss: 0.1209 | Elapsed: 505.9s\n"}
+,{"stream_name":"stdout","time":8874.756870146,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1100/2075 | Loss: 0.1203 | Elapsed: 556.1s\n"}
+,{"stream_name":"stdout","time":8925.538778796,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1200/2075 | Loss: 0.1194 | Elapsed: 606.9s\n"}
+,{"stream_name":"stdout","time":8976.11499081,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1300/2075 | Loss: 0.1191 | Elapsed: 657.5s\n"}
+,{"stream_name":"stdout","time":9026.823606631,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1400/2075 | Loss: 0.1191 | Elapsed: 708.2s\n"}
+,{"stream_name":"stdout","time":9077.168506158,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1500/2075 | Loss: 0.1181 | Elapsed: 758.5s\n"}
+,{"stream_name":"stdout","time":9128.080721701,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1600/2075 | Loss: 0.1176 | Elapsed: 809.5s\n"}
+,{"stream_name":"stdout","time":9178.525906521,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1700/2075 | Loss: 0.1179 | Elapsed: 859.9s\n"}
+,{"stream_name":"stdout","time":9229.091373119,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1800/2075 | Loss: 0.1183 | Elapsed: 910.5s\n"}
+,{"stream_name":"stdout","time":9279.465199266,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 1900/2075 | Loss: 0.1181 | Elapsed: 960.8s\n"}
+,{"stream_name":"stdout","time":9330.468500088,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 2000/2075 | Loss: 0.1184 | Elapsed: 1011.8s\n"}
+,{"stream_name":"stdout","time":9368.320918862,"data":"[STANDARD_ADAPTER | Epoch 3/3] Step 2075/2075 | Loss: 0.1180 | Elapsed: 1049.7s\n"}
+,{"stream_name":"stdout","time":9490.765307427,"data":"--\u003e [STANDARD_ADAPTER Epoch 3] Val Dice: 0.9583\n"}
+,{"stream_name":"stdout","time":9490.765356775,"data":"\n"}
+,{"stream_name":"stdout","time":9490.765362189,"data":"--- Running Robustness Evaluation for STANDARD_ADAPTER ---\n"}
+,{"stream_name":"stdout","time":9544.658892663,"data":"    Delta = 0.00 | Dice: 0.9633 | IoU: 0.9298\n"}
+,{"stream_name":"stdout","time":9598.174450938,"data":"    Delta = 0.05 | Dice: 0.9599 | IoU: 0.9237\n"}
+,{"stream_name":"stdout","time":9651.971911955,"data":"    Delta = 0.10 | Dice: 0.9536 | IoU: 0.9123\n"}
+,{"stream_name":"stdout","time":9705.61439205,"data":"    Delta = 0.20 | Dice: 0.9296 | IoU: 0.8724\n"}
+,{"stream_name":"stdout","time":9705.748978943,"data":"\n"}
+,{"stream_name":"stdout","time":9705.749007901,"data":"Saved CSV benchmark to: /kaggle/working/peft_comparative_benchmark_results.csv\n"}
+,{"stream_name":"stdout","time":9705.749158567,"data":"Saved Master Report to: /kaggle/working/peft_comparative_benchmark_report.md\n"}
+,{"stream_name":"stdout","time":9705.749200347,"data":"\n"}
+,{"stream_name":"stdout","time":9705.749207824,"data":"=== Comparative PEFT Benchmark Complete ===\n"}
+,{"stream_name":"stderr","time":9710.148500851,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":9710.148556169,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":9710.369692046,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":9710.369717709,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":9710.997254555,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":9712.238162531,"data":"[NbConvertApp] Writing 394940 bytes to __results__.html\n"}
+]
