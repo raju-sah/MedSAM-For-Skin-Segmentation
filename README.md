@@ -2,6 +2,13 @@
 
 ## Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation (CG-MedSAM)
 
+[![CG-MedSAM CI Pipeline](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml/badge.svg)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml)
+[![Project Website](https://img.shields.io/badge/Project-Website-emerald?style=flat&logo=github)](https://raju-sah.github.io/MedSAM-For-Skin-Segmentation/)
+[![Release](https://img.shields.io/github/v/release/raju-sah/MedSAM-For-Skin-Segmentation?color=blue)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/releases/tag/v1.0.0)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-CG--MedSAM-orange)](https://huggingface.co/raju-ai/CG-MedSAM)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 This repository contains the official implementation, validation suite, and reproducible benchmarks for **CG-MedSAM**: a parameter-efficient adaptation framework designed to improve skin lesion segmentation robustness across diverse Fitzpatrick skin-tone groups under both clean and perturbed prompt conditions.
 
 ---

@@ -70,8 +70,13 @@ def run_zero_shot_evaluation(
             tone_group = row["skin_tone_group"]
 
             if not os.path.exists(m_path):
-                continue
-            mask = np.load(m_path)
+                if use_mock:
+                    mask = np.zeros((100, 100), dtype=np.uint8)
+                    mask[25:75, 25:75] = 1
+                else:
+                    continue
+            else:
+                mask = np.load(m_path)
             H, W = mask.shape[:2]
             binary_gt = (mask == 1).astype(np.uint8)
             bbox = extract_bbox_from_binary_mask(binary_gt)
@@ -79,7 +84,7 @@ def run_zero_shot_evaluation(
                 continue
 
             # Base tone calibration for synthetic clinical image representation if raw photo absent
-            if row["image_available"] and os.path.exists(str(row["image_path"])):
+            if row.get("image_available", False) and os.path.exists(str(row.get("image_path", ""))):
                 bgr = cv2.imread(str(row["image_path"]))
                 img_rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
             else:
@@ -131,7 +136,7 @@ def run_zero_shot_evaluation(
 
     # 2. EVALUATE IN-DOMAIN DERMOSCOPY (ISIC 2018 Validation Partition, N=519)
     print(f"\n[2/2] Evaluating on ISIC 2018 Dermoscopy Val Partition from {isic_manifest_path}...")
-    if os.path.exists(isic_manifest_path) and os.path.exists(isic_masks_dir):
+    if os.path.exists(isic_manifest_path) and (os.path.exists(isic_masks_dir) or use_mock):
         isic_df = pd.read_csv(isic_manifest_path)
         val_df = isic_df[isic_df["split"] == "val"].reset_index(drop=True)
         if max_samples is not None and max_samples > 0:
@@ -146,17 +151,23 @@ def run_zero_shot_evaluation(
                 m_path = os.path.join(isic_masks_dir, "ISIC2018_Task1_Training_GroundTruth", mask_filename)
 
             if not os.path.exists(m_path):
-                continue
-
-            # Load ISIC binary mask
-            mask_gray = cv2.imread(m_path, cv2.IMREAD_GRAYSCALE)
-            if mask_gray is None:
-                continue
-            H, W = mask_gray.shape[:2]
-            binary_gt = (mask_gray > 127).astype(np.uint8)
-            bbox = extract_bbox_from_binary_mask(binary_gt)
-            if bbox is None:
-                continue
+                if use_mock:
+                    binary_gt = np.zeros((100, 100), dtype=np.uint8)
+                    binary_gt[25:75, 25:75] = 1
+                    H, W = binary_gt.shape[:2]
+                    bbox = extract_bbox_from_binary_mask(binary_gt)
+                else:
+                    continue
+            else:
+                # Load ISIC binary mask
+                mask_gray = cv2.imread(m_path, cv2.IMREAD_GRAYSCALE)
+                if mask_gray is None:
+                    continue
+                H, W = mask_gray.shape[:2]
+                binary_gt = (mask_gray > 127).astype(np.uint8)
+                bbox = extract_bbox_from_binary_mask(binary_gt)
+                if bbox is None:
+                    continue
 
             # Synthesize or load dermoscopy image
             img_rgb = np.zeros((H, W, 3), dtype=np.uint8)
@@ -193,7 +204,14 @@ def run_zero_shot_evaluation(
         print(f"  Warning: ISIC manifest or masks dir not found ({isic_manifest_path}, {isic_masks_dir})")
 
     # Convert to DataFrame and save
-    results_df = pd.DataFrame(eval_records)
+    if len(eval_records) == 0:
+        results_df = pd.DataFrame(columns=[
+            "dataset", "image_id", "skin_tone_group", "delta", "realization_id",
+            "bbox_xmin", "bbox_ymin", "bbox_xmax", "bbox_ymax",
+            "dice", "iou", "hd95", "nsd"
+        ])
+    else:
+        results_df = pd.DataFrame(eval_records)
     results_df.to_csv(results_csv, index=False)
     print(f"\n[+] Saved detailed evaluation records ({len(results_df)} evaluations) to: {results_csv}")
 
@@ -211,8 +229,8 @@ def run_zero_shot_evaluation(
 
 def generate_markdown_report(df: pd.DataFrame, output_path: str, use_mock: bool = False) -> Dict[str, Any]:
     """Generate structured markdown report for E03 zero-shot evaluation."""
-    sddi_sub = df[df["dataset"] == "sDDI_clinical_test"]
-    isic_sub = df[df["dataset"] == "ISIC2018_val"]
+    sddi_sub = df[df["dataset"] == "sDDI_clinical_test"] if "dataset" in df.columns else pd.DataFrame()
+    isic_sub = df[df["dataset"] == "ISIC2018_val"] if "dataset" in df.columns else pd.DataFrame()
 
     lines = []
     lines.append("# E03: Zero-Shot MedSAM Baseline Evaluation Report\n")
