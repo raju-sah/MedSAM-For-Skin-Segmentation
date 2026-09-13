@@ -1,5 +1,5 @@
 {
-  "id": "rajusah/cg-medsam-skin-lesion-segmentation",
+  "id": "rajucode/cg-medsam-skin-lesion-segmentation-miccai-2026",
   "title": "CG-MedSAM: Skin Lesion Segmentation (MICCAI 2026)",
   "code_file": "CG_MedSAM_Kaggle_Quickstart.ipynb",
   "language": "python",
