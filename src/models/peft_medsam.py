@@ -14,14 +14,14 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.models.adapters import LoRALinear, BottleneckAdapter, ContrastGatingMLP
+from src.models.adapters import LoRALinear, BottleneckAdapter, ContrastGatingMLP, ContrastGatedLoRALinear
 from src.models.medsam_wrapper import MockMedSAMModel
 
 
 class PEFTMedSAM(nn.Module):
-    """Unified PEFT MedSAM model supporting Decoder-only, LoRA, and CG-Adapter architectures."""
+    """Unified PEFT MedSAM model supporting Decoder-only, LoRA, CG-Adapter, and CG-LoRA architectures."""
 
-    VALID_MODES = ["decoder_only", "lora", "standard_adapter", "cg_adapter", "ablation"]
+    VALID_MODES = ["decoder_only", "lora", "standard_adapter", "cg_adapter", "ablation", "cg_lora"]
 
     def __init__(
         self,
@@ -64,6 +64,9 @@ class PEFTMedSAM(nn.Module):
             elif mode == "lora":
                 dummy_lin = nn.Linear(768, 768)
                 self.mock_lora = LoRALinear(dummy_lin, r=bottleneck_rank, lora_alpha=lora_alpha)
+            elif mode == "cg_lora":
+                dummy_lin = nn.Linear(768, 768)
+                self.mock_lora = ContrastGatedLoRALinear(dummy_lin, r=bottleneck_rank, lora_alpha=lora_alpha)
 
     def _freeze_backbone(self):
         """Freeze the entire backbone initially."""
@@ -79,12 +82,16 @@ class PEFTMedSAM(nn.Module):
         """Inject adapters or LoRA layers into the ViT backbone."""
         vit_blocks = self.base_model.image_encoder.blocks
 
-        if self.mode == "lora":
+        if self.mode in ["lora", "cg_lora"]:
+            is_gated = (self.mode == "cg_lora")
             for block in vit_blocks:
                 # Replace q_proj and v_proj in multi-head self-attention
                 q_proj = block.attn.qkv
                 # Wrap linear
-                lora_qkv = LoRALinear(q_proj, r=self.rank, lora_alpha=self.lora_alpha)
+                if is_gated:
+                    lora_qkv = ContrastGatedLoRALinear(q_proj, r=self.rank, lora_alpha=self.lora_alpha)
+                else:
+                    lora_qkv = LoRALinear(q_proj, r=self.rank, lora_alpha=self.lora_alpha)
                 block.attn.qkv = lora_qkv
                 self.lora_layers.append(lora_qkv)
 
@@ -145,11 +152,19 @@ class PEFTMedSAM(nn.Module):
                 logits = logits + 0.0 * g
             elif hasattr(self, "mock_lora"):
                 dummy_feat = torch.zeros((image_tensor.size(0), 1, 768), device=image_tensor.device, dtype=logits.dtype)
-                g = self.mock_lora(dummy_feat).sum()
+                if isinstance(self.mock_lora, ContrastGatedLoRALinear):
+                    g = self.mock_lora(dummy_feat, c_prompt=c_prompt).sum()
+                else:
+                    g = self.mock_lora(dummy_feat).sum()
                 logits = logits + 0.0 * g
             return logits
 
         # Real MedSAM forward pass with PEFT adapters
+        if self.mode == "cg_lora":
+            for layer in self.lora_layers:
+                if hasattr(layer, "set_contrast"):
+                    layer.set_contrast(c_prompt)
+
         if self.mode in ["standard_adapter", "cg_adapter", "ablation"]:
             # Forward through ViT blocks with adapter residuals
             x = self.base_model.image_encoder.patch_embed(image_tensor)

@@ -54,9 +54,27 @@ class TestPEFTModels(unittest.TestCase):
         # Up-projection zero-init -> output matches input at step 0
         self.assertTrue(torch.allclose(x, y, atol=1e-5))
 
+    def test_cg_lora_identity_and_gating(self):
+        """Verify ContrastGatedLoRALinear matches base linear at init and modulates correctly."""
+        from src.models.adapters import ContrastGatedLoRALinear
+        base_lin = nn.Linear(768, 768)
+        cg_lora = ContrastGatedLoRALinear(base_lin, r=16, lora_alpha=32.0)
+        x = torch.randn(2, 16, 768)
+        c = torch.tensor([[0.7], [0.2]])
+
+        # At initialization, B is zero, so output must match base linear exactly
+        y_base = base_lin(x)
+        y_cg = cg_lora(x, c_prompt=c)
+        self.assertTrue(torch.allclose(y_base, y_cg, atol=1e-5))
+
+        # Test set_contrast context
+        cg_lora.set_contrast(c)
+        y_ctx = cg_lora(x)
+        self.assertTrue(torch.allclose(y_base, y_ctx, atol=1e-5))
+
     def test_peft_medsam_modes(self):
         """Verify all PEFT modes initialize and run forward passes."""
-        for mode in ["decoder_only", "lora", "standard_adapter", "cg_adapter", "ablation"]:
+        for mode in ["decoder_only", "lora", "standard_adapter", "cg_adapter", "ablation", "cg_lora"]:
             model = PEFTMedSAM(base_medsam=None, mode=mode)
             img = torch.randn(1, 3, 1024, 1024)
             box = torch.tensor([[50, 50, 200, 200]], dtype=torch.float32)

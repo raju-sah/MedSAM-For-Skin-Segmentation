@@ -406,3 +406,150 @@ def audit_proxy_composition(
         "invalid_empty_fraction": 0.0,
         "skin_proxy_purity": skin_proxy_purity
     }
+
+
+def compute_point_contrast_proxy(
+    image_rgb: np.ndarray,
+    foreground_point: Tuple[int, int],
+    background_point: Optional[Tuple[int, int]] = None,
+    estimated_radius: int = 25,
+    min_luminance: float = 10.0,
+    max_luminance: float = 95.0,
+    b_star_epsilon: float = 0.01
+) -> ContrastResult:
+    """Extract zero-leakage color contrast proxy from a point prompt.
+
+    Args:
+        image_rgb: RGB image as uint8 array (H, W, 3).
+        foreground_point: (x, y) coordinates of lesion foreground click.
+        background_point: Optional (x, y) coordinates of perilesional skin click.
+        estimated_radius: Radius in pixels used to construct local sampling regions.
+        min_luminance: Lower threshold for L* shadow filtering.
+        max_luminance: Upper threshold for L* specularity filtering.
+        b_star_epsilon: Singularity threshold for b*.
+
+    Returns:
+        ContrastResult dataclass containing CIE Lab delta_e_ab and diagnostics.
+    """
+    H, W, _ = image_rgb.shape
+    xf, yf = int(round(foreground_point[0])), int(round(foreground_point[1]))
+
+    # Bounds check
+    if xf < 0 or xf >= W or yf < 0 or yf >= H:
+        return ContrastResult(
+            delta_ita=0.0, delta_l=0.0, delta_e_ab=0.0, delta_a=0.0, delta_b=0.0,
+            core_median_ita=0.0, skin_median_ita=0.0,
+            core_median_l=0.0, skin_median_l=0.0,
+            core_median_a=0.0, skin_median_a=0.0,
+            core_median_b=0.0, skin_median_b=0.0,
+            core_valid_pixels=0, core_filtered_pixels=0,
+            skin_valid_pixels=0, skin_filtered_pixels=0,
+            b_star_singular_pixels=0, is_valid=False,
+            warning_message="Foreground point out of image bounds"
+        )
+
+    r_core = max(3, int(round(0.4 * estimated_radius)))
+
+    # Coordinate grid
+    yy, xx = np.ogrid[:H, :W]
+    dist_sq_fg = (xx - xf) ** 2 + (yy - yf) ** 2
+    core_mask = dist_sq_fg <= (r_core ** 2)
+
+    if background_point is not None:
+        xb, yb = int(round(background_point[0])), int(round(background_point[1]))
+        if 0 <= xb < W and 0 <= yb < H:
+            r_bg = max(3, int(round(0.4 * estimated_radius)))
+            dist_sq_bg = (xx - xb) ** 2 + (yy - yb) ** 2
+            skin_mask = dist_sq_bg <= (r_bg ** 2)
+        else:
+            skin_mask = np.zeros((H, W), dtype=bool)
+    else:
+        # Annular ring around foreground point
+        r_inner = int(round(1.5 * estimated_radius))
+        r_outer = int(round(2.5 * estimated_radius))
+        skin_mask = (dist_sq_fg >= (r_inner ** 2)) & (dist_sq_fg <= (r_outer ** 2))
+
+    lab = rgb_to_lab(image_rgb)
+    L = lab[:, :, 0]
+    A = lab[:, :, 1]
+    B = lab[:, :, 2]
+
+    core_L = L[core_mask].flatten()
+    core_A = A[core_mask].flatten()
+    core_B = B[core_mask].flatten()
+
+    skin_L = L[skin_mask].flatten()
+    skin_A = A[skin_mask].flatten()
+    skin_B = B[skin_mask].flatten()
+
+    total_core = len(core_L)
+    total_skin = len(skin_L)
+
+    if total_core == 0 or total_skin == 0:
+        return ContrastResult(
+            delta_ita=0.0, delta_l=0.0, delta_e_ab=0.0, delta_a=0.0, delta_b=0.0,
+            core_median_ita=0.0, skin_median_ita=0.0,
+            core_median_l=0.0, skin_median_l=0.0,
+            core_median_a=0.0, skin_median_a=0.0,
+            core_median_b=0.0, skin_median_b=0.0,
+            core_valid_pixels=0, core_filtered_pixels=total_core,
+            skin_valid_pixels=0, skin_filtered_pixels=total_skin,
+            b_star_singular_pixels=0, is_valid=False,
+            warning_message="Empty core or skin sampling region"
+        )
+
+    core_ita, core_valid_mask, core_sing = calculate_ita(
+        core_L, core_B, b_star_epsilon=b_star_epsilon, min_l=min_luminance, max_l=max_luminance
+    )
+    skin_ita, skin_valid_mask, skin_sing = calculate_ita(
+        skin_L, skin_B, b_star_epsilon=b_star_epsilon, min_l=min_luminance, max_l=max_luminance
+    )
+
+    core_valid_count = len(core_ita)
+    skin_valid_count = len(skin_ita)
+
+    if core_valid_count < 3 or skin_valid_count < 3:
+        return ContrastResult(
+            delta_ita=0.0, delta_l=0.0, delta_e_ab=0.0, delta_a=0.0, delta_b=0.0,
+            core_median_ita=0.0, skin_median_ita=0.0,
+            core_median_l=0.0, skin_median_l=0.0,
+            core_median_a=0.0, skin_median_a=0.0,
+            core_median_b=0.0, skin_median_b=0.0,
+            core_valid_pixels=core_valid_count, core_filtered_pixels=total_core - core_valid_count,
+            skin_valid_pixels=skin_valid_count, skin_filtered_pixels=total_skin - skin_valid_count,
+            b_star_singular_pixels=core_sing + skin_sing, is_valid=False,
+            warning_message="Insufficient valid pixels after luminance filtering"
+        )
+
+    core_med_ita = float(np.median(core_ita))
+    skin_med_ita = float(np.median(skin_ita))
+
+    core_med_l = float(np.median(core_L[core_valid_mask]))
+    skin_med_l = float(np.median(skin_L[skin_valid_mask]))
+
+    core_med_a = float(np.median(core_A[core_valid_mask]))
+    skin_med_a = float(np.median(skin_A[skin_valid_mask]))
+
+    core_med_b = float(np.median(core_B[core_valid_mask]))
+    skin_med_b = float(np.median(skin_B[skin_valid_mask]))
+
+    delta_ita = abs(core_med_ita - skin_med_ita)
+    delta_l = abs(core_med_l - skin_med_l)
+    delta_a = abs(core_med_a - skin_med_a)
+    delta_b = abs(core_med_b - skin_med_b)
+    delta_e_ab = float(np.sqrt((core_med_l - skin_med_l) ** 2 + (core_med_a - skin_med_a) ** 2 + (core_med_b - skin_med_b) ** 2))
+
+    return ContrastResult(
+        delta_ita=delta_ita, delta_l=delta_l, delta_e_ab=delta_e_ab,
+        delta_a=delta_a, delta_b=delta_b,
+        core_median_ita=core_med_ita, skin_median_ita=skin_med_ita,
+        core_median_l=core_med_l, skin_median_l=skin_med_l,
+        core_median_a=core_med_a, skin_median_a=skin_med_a,
+        core_median_b=core_med_b, skin_median_b=skin_med_b,
+        core_valid_pixels=core_valid_count,
+        core_filtered_pixels=total_core - core_valid_count,
+        skin_valid_pixels=skin_valid_count,
+        skin_filtered_pixels=total_skin - skin_valid_count,
+        b_star_singular_pixels=core_sing + skin_sing,
+        is_valid=True
+    )

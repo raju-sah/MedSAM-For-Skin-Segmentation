@@ -113,6 +113,31 @@ class TestContrastProxy(unittest.TestCase):
         self.assertGreater(purity["marker_contamination"], 0.0)
         self.assertLess(purity["skin_proxy_purity"], 1.0)
 
+    def test_compute_point_contrast_proxy(self):
+        """Test zero-leakage point-conditioned contrast calculation."""
+        from src.data.contrast_proxy import compute_point_contrast_proxy
+        img = np.full((120, 120, 3), 190, dtype=np.uint8)
+        # Dark circular lesion at center
+        yy, xx = np.ogrid[:120, :120]
+        lesion_mask = ((xx - 60) ** 2 + (yy - 60) ** 2) <= (20 ** 2)
+        img[lesion_mask] = 40
+
+        # 1. Single foreground point prompt
+        res1 = compute_point_contrast_proxy(img, foreground_point=(60, 60), estimated_radius=20)
+        self.assertTrue(res1.is_valid)
+        self.assertGreater(res1.delta_e_ab, 15.0)
+        self.assertGreater(res1.delta_l, 10.0)
+
+        # 2. Dual-point prompt (foreground + background)
+        res2 = compute_point_contrast_proxy(img, foreground_point=(60, 60), background_point=(10, 10), estimated_radius=15)
+        self.assertTrue(res2.is_valid)
+        self.assertGreater(res2.delta_e_ab, 15.0)
+
+        # 3. Degenerate out-of-bounds point
+        res3 = compute_point_contrast_proxy(img, foreground_point=(200, 200))
+        self.assertFalse(res3.is_valid)
+        self.assertIn("out of image bounds", res3.warning_message)
+
 
 if __name__ == "__main__":
     unittest.main()

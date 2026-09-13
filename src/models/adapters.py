@@ -159,3 +159,39 @@ class BottleneckAdapter(nn.Module):
             adapter_out = gamma_view * adapter_out
 
         return x + adapter_out
+
+
+class ContrastGatedLoRALinear(LoRALinear):
+    """Contrast-Gated Low-Rank Adaptation (CG-LoRA) layer.
+
+    W(x) = W_0 x + gamma * (alpha / r) * (B @ A @ x)
+    where gamma = 2.0 * Sigmoid(MLP(c_prompt)) modulates the low-rank delta.
+    """
+
+    def __init__(
+        self,
+        base_linear: nn.Linear,
+        r: int = 16,
+        lora_alpha: float = 32.0,
+        lora_dropout: float = 0.1,
+        gating_mlp: Optional[ContrastGatingMLP] = None
+    ):
+        super().__init__(base_linear, r=r, lora_alpha=lora_alpha, lora_dropout=lora_dropout)
+        self.gate = gating_mlp if gating_mlp is not None else ContrastGatingMLP(hidden_dim=16)
+        self.current_c_prompt: Optional[torch.Tensor] = None
+
+    def set_contrast(self, c_prompt: Optional[torch.Tensor]):
+        """Set the active prompt contrast tensor for downstream forward passes."""
+        self.current_c_prompt = c_prompt
+
+    def forward(self, x: torch.Tensor, c_prompt: Optional[torch.Tensor] = None) -> torch.Tensor:
+        base_out = self.base_linear(x)
+        lora_out = (self.dropout(x) @ self.lora_A.T) @ self.lora_B.T
+
+        c = c_prompt if c_prompt is not None else self.current_c_prompt
+        if c is not None and self.gate is not None:
+            gamma = self.gate(c)
+            gamma_view = gamma.view(x.size(0), *([1] * (x.ndim - 1)))
+            return base_out + gamma_view * (self.scaling * lora_out)
+
+        return base_out + self.scaling * lora_out
