@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CG-MedSAM | Contrast-Gated Skin Lesion Segmentation Demo</title>
+  <meta name="description" content="Interactive clinical demonstration of CG-MedSAM: Contrast-gated parameter-efficient foundation model adaptation for skin-tone-robust lesion segmentation across Fitzpatrick skin types.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+      <div class="brand-group">
+        <div class="brand-logo-badge">CG</div>
+        <div class="brand-text">
+          <h1 class="brand-title">CG-MedSAM <span class="badge-tag">MICCAI 2026</span></h1>
+          <p class="brand-subtitle">Contrast-Gated Parameter-Efficient Vision Transformer Adaptation</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="status-indicator" id="statusPill">
+          <span class="pulse-dot"></span>
+          <span class="status-label" id="statusLabel">Checking System...</span>
+        </div>
+        <a href="https://github.com/raju-sah/MedSAM-For-Skin-Segmentation" target="_blank" class="nav-btn ghost-btn" id="githubLink">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Repository
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="workspace-grid">
+      <!-- Left Panel: Input & Controls -->
+      <aside class="panel control-panel">
+        <!-- Sample Selector -->
+        <section class="control-section">
+          <div class="section-header">
+            <h2 class="section-title">1. Curated Benchmark Samples</h2>
+            <span class="section-hint">Click to load</span>
+          </div>
+          <div class="sample-cards-grid" id="sampleCardsContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </section>
+
+        <!-- Custom Upload -->
+        <section class="control-section">
+          <div class="section-header">
+            <h2 class="section-title">2. Custom Image Upload</h2>
+          </div>
+          <div class="upload-dropzone" id="dropzone">
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden>
+            <div class="upload-content">
+              <svg class="upload-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <p class="upload-text"><strong>Drag & drop lesion image</strong> or <span class="highlight-link">browse</span></p>
+              <span class="upload-specs">Supports PNG, JPG, WebP up to 25MB</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Model Architecture Selector -->
+        <section class="control-section">
+          <div class="section-header">
+            <h2 class="section-title">3. Model Architecture</h2>
+          </div>
+          <div class="model-select-group">
+            <label class="model-option active" data-model="cg_adapter">
+              <input type="radio" name="modelChoice" value="cg_adapter" checked>
+              <div class="model-meta">
+                <div class="model-name-row">
+                  <span class="model-name">CG-Adapter (Ours)</span>
+                  <span class="pill-badge recommended">Top Robustness</span>
+                </div>
+                <span class="model-desc">Contrast-gated PEFT (4.64% weights, ΔE*ab modulation)</span>
+              </div>
+            </label>
+
+            <label class="model-option" data-model="standard_adapter">
+              <input type="radio" name="modelChoice" value="standard_adapter">
+              <div class="model-meta">
+                <div class="model-name-row">
+                  <span class="model-name">Standard Adapter</span>
+                  <span class="pill-badge baseline">4.64% Weights</span>
+                </div>
+                <span class="model-desc">Bottleneck Adapter with static constant factor (γ = 1.0)</span>
+              </div>
+            </label>
+
+            <label class="model-option" data-model="lora">
+              <input type="radio" name="modelChoice" value="lora">
+              <div class="model-meta">
+                <div class="model-name-row">
+                  <span class="model-name">LoRA (r=16)</span>
+                  <span class="pill-badge baseline">4.93% Weights</span>
+                </div>
+                <span class="model-desc">Low-Rank Adaptation injected on query/value projections</span>
+              </div>
+            </label>
+
+            <label class="model-option" data-model="decoder_only">
+              <input type="radio" name="modelChoice" value="decoder_only">
+              <div class="model-meta">
+                <div class="model-name-row">
+                  <span class="model-name">Decoder-Only</span>
+                  <span class="pill-badge baseline">4.33% Weights</span>
+                </div>
+                <span class="model-desc">Tuned mask decoder with frozen ViT-B image encoder</span>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- Prompt Actions -->
+        <section class="control-section">
+          <div class="section-header">
+            <h2 class="section-title">4. Prompt Bounding Box</h2>
+          </div>
+          <div class="prompt-action-row">
+            <button type="button" class="btn secondary-btn" id="btnAutoPrompt">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              Auto-Detect Box
+            </button>
+            <button type="button" class="btn ghost-btn" id="btnResetBox">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset
+            </button>
+          </div>
+
+          <div class="coord-inputs-grid">
+            <div class="input-field">
+              <label>X1</label>
+              <input type="number" id="inputX1" value="0" min="0">
+            </div>
+            <div class="input-field">
+              <label>Y1</label>
+              <input type="number" id="inputY1" value="0" min="0">
+            </div>
+            <div class="input-field">
+              <label>X2</label>
+              <input type="number" id="inputX2" value="100" min="1">
+            </div>
+            <div class="input-field">
+              <label>Y2</label>
+              <input type="number" id="inputY2" value="100" min="1">
+            </div>
+          </div>
+        </section>
+
+        <!-- Run Segment Button -->
+        <button type="button" class="btn primary-action-btn" id="btnRunSegment">
+          <span class="btn-spinner" id="segmentSpinner"></span>
+          <span class="btn-text" id="segmentBtnText">Segment Lesion</span>
+        </button>
+      </aside>
+
+      <!-- Center Panel: Interactive Canvas & Visualizer -->
+      <section class="panel visualizer-panel">
+        <div class="visualizer-header">
+          <div class="tab-pill-group" id="viewModeGroup">
+            <button type="button" class="tab-pill active" data-view="overlay">Composite Overlay</button>
+            <button type="button" class="tab-pill" data-view="split">Side-by-Side Split</button>
+            <button type="button" class="tab-pill" data-view="mask">Binary Mask</button>
+            <button type="button" class="tab-pill" data-view="original">Original + Prompt</button>
+          </div>
+          <div class="canvas-toggles">
+            <label class="toggle-label" title="Show zero-leakage eroded core (50% shrink)">
+              <input type="checkbox" id="toggleCoreBox" checked>
+              <span class="toggle-custom core-check"></span>
+              <span>Core Proxy (C<sub>core</sub>)</span>
+            </label>
+            <label class="toggle-label" title="Show perilesional background ring (25% expansion)">
+              <input type="checkbox" id="toggleRingBox" checked>
+              <span class="toggle-custom ring-check"></span>
+              <span>Background Ring (R<sub>ring</sub>)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-viewport" id="viewport">
+          <canvas id="mainCanvas"></canvas>
+          <div class="canvas-overlay-ui" id="canvasHint">
+            <span>Drag on image to draw bounding box, or drag corners to adjust</span>
+          </div>
+        </div>
+
+        <!-- Canvas Footer / Export -->
+        <div class="visualizer-footer">
+          <div class="dimensions-display" id="dimDisplay">
+            Resolution: <span id="imgDimText">-- x -- px</span>
+          </div>
+          <div class="export-actions">
+            <button type="button" class="btn action-sub-btn" id="btnDownloadMask" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Mask PNG
+            </button>
+            <button type="button" class="btn action-sub-btn" id="btnDownloadOverlay" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Overlay PNG
+            </button>
+            <button type="button" class="btn action-sub-btn" id="btnDownloadTelemetry" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Report JSON
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Real-Time Physics & Skin Equity Telemetry -->
+      <aside class="panel telemetry-panel">
+        <div class="telemetry-header">
+          <h2 class="section-title">Optical Physics Telemetry</h2>
+          <span class="telemetry-live-badge">Zero-Leakage</span>
+        </div>
+
+        <!-- Gauge 1: CIE Lab Color Distance Delta E*ab -->
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-label">Perceptual Color Distance</span>
+            <span class="metric-symbol">&Delta;E*<sub>ab</sub></span>
+          </div>
+          <div class="gauge-row">
+            <div class="circular-metric">
+              <span class="metric-big-num" id="deltaENum">--</span>
+              <span class="metric-unit">Lab units</span>
+            </div>
+            <div class="gauge-bar-wrapper">
+              <div class="gauge-track">
+                <div class="gauge-fill" id="deltaEBar" style="width: 0%;"></div>
+              </div>
+              <div class="gauge-labels">
+                <span>0.0 (Minimal)</span>
+                <span>28.5 (&mu;)</span>
+                <span>60.0+ (High)</span>
+              </div>
+            </div>
+          </div>
+          <div class="metric-footnote" id="deltaEFootnote">
+            Low &Delta;E*ab indicates high boundary ambiguity in dark or low-contrast lesions.
+          </div>
+        </div>
+
+        <!-- Gauge 2: Dynamic Adapter Gate Gamma -->
+        <div class="metric-card highlight-card">
+          <div class="metric-card-header">
+            <span class="metric-label">Dynamic Adapter Gate</span>
+            <span class="metric-symbol">&gamma; Factor</span>
+          </div>
+          <div class="gate-value-row">
+            <span class="gate-big-val" id="gammaNum">1.00&times;</span>
+            <span class="gate-badge" id="gammaBadge">Nominal</span>
+          </div>
+          <div class="formula-box">
+            <code>&gamma; = 2.0 &times; &sigma;(W<sub>2</sub> ReLU(W<sub>1</sub> c + b<sub>1</sub>) + b<sub>2</sub>)</code>
+          </div>
+          <p class="gate-explanation" id="gammaExplanation">
+            Modulates adapter residual scaling according to localized optical difficulty.
+          </p>
+        </div>
+
+        <!-- Card 3: Estimated Skin Tone Cohort -->
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-label">Perilesional Skin Tone</span>
+            <span class="metric-symbol">Fitzpatrick Scale</span>
+          </div>
+          <div class="skin-cohort-chip" id="skinCohortChip">
+            <span class="tone-circle" id="toneCircle"></span>
+            <span class="tone-name" id="toneName">Awaiting Analysis...</span>
+          </div>
+          <div class="skin-submetrics">
+            <div class="submetric-col">
+              <span class="sub-label">Skin Luminance (L*)</span>
+              <span class="sub-val" id="skinLuminanceVal">--</span>
+            </div>
+            <div class="submetric-col">
+              <span class="sub-label">ITA&deg; Angle</span>
+              <span class="sub-val" id="itaVal">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Geometric Lesion Properties -->
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-label">Segmentation Properties</span>
+            <span class="metric-symbol">Morphometry</span>
+          </div>
+          <div class="morph-grid">
+            <div class="morph-item">
+              <span class="morph-key">Area</span>
+              <span class="morph-val" id="lesionAreaVal">-- px</span>
+            </div>
+            <div class="morph-item">
+              <span class="morph-key">Coverage</span>
+              <span class="morph-val" id="lesionCoverageVal">-- %</span>
+            </div>
+            <div class="morph-item">
+              <span class="morph-key">Prompt Type</span>
+              <span class="morph-val" id="promptTypeVal">--</span>
+            </div>
+            <div class="morph-item">
+              <span class="morph-key">Backend</span>
+              <span class="morph-val" id="backendVal">PyTorch</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
