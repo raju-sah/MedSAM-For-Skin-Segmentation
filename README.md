@@ -4,6 +4,7 @@
 
 [![CG-MedSAM CI Pipeline](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml/badge.svg)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/raju-sah/MedSAM-For-Skin-Segmentation/blob/main/notebooks/CG_MedSAM_Quickstart.ipynb)
+[![Open In Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/kernels/welcome?src=https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/blob/main/notebooks/CG_MedSAM_Kaggle_Quickstart.ipynb)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(HTTPS)-success?style=flat&logo=cloudflare)](https://cliff-knowing-howard-replication.trycloudflare.com)
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Demo-yellow)](https://huggingface.co/spaces/raju-ai/CG-MedSAM-Showcase)
 [![Project Website](https://img.shields.io/badge/Project-Website-emerald?style=flat&logo=github)](https://raju-sah.github.io/MedSAM-For-Skin-Segmentation/)
