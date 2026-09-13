@@ -104,3 +104,65 @@ python3 src/eval/compile_table3_ablation.py      # Table 3
 python3 src/eval/compute_statistical_tests.py    # Table 4
 python3 scripts/generate_figure_panels.py        # Figure 1 Panel
 ```
+
+---
+
+### 5. Standalone Inference CLI & Interactive Web Demo
+
+#### Interactive Web Demo (FastAPI + HTML5 Canvas)
+Launch the modern, dark-mode clinical segmentation workspace:
+```bash
+uvicorn web_demo.app:app --host 127.0.0.1 --port 7860
+```
+Then navigate to `http://127.0.0.1:7860` in your browser. Features include:
+- Interactive bounding-box drawing, handle resizing, and auto-prompt estimation.
+- Real-time zero-leakage optical physics calculation ($\Delta E^*_{ab}$ gauge, dynamic gate $\gamma$, and Fitzpatrick classification).
+- Side-by-side comparison slider, mask export, and clinical telemetry JSON download.
+- Pre-loaded multi-tone demonstration samples (Light FST I–II, Medium FST III–IV, Dark FST V–VI).
+
+#### Standalone Inference CLI (`inference.py`)
+```bash
+# Single image with auto-prompt detection
+python inference.py --image demo_samples/sample_dark_fst_v.jpg --output_dir output/ --model cg_adapter
+
+# Custom clinician prompt box
+python inference.py --image demo_samples/sample_dark_fst_v.jpg --bbox 50 114 109 155 --output_dir output/
+
+# Batch process directory
+python inference.py --input_dir demo_samples/ --output_dir output/ --model cg_adapter
+```
+
+---
+
+### 6. Publication Manuscript & LaTeX Submission Package
+
+Complete publication draft authored according to Springer LNCS (MICCAI 2026) double-blind submission guidelines:
+- **Main Paper TeX:** [`paper/main.tex`](paper/main.tex)
+- **Supplementary Material TeX:** [`paper/supplementary.tex`](paper/supplementary.tex)
+- **Bibliography:** [`paper/references.bib`](paper/references.bib)
+- **Full Markdown Manuscript:** [`paper/MANUSCRIPT.md`](paper/MANUSCRIPT.md)
+- **Full Markdown Supplementary:** [`paper/SUPPLEMENTARY.md`](paper/SUPPLEMENTARY.md)
+- **Overleaf-Ready Archive:** `paper/overleaf_miccai_submission.tar.gz`
+
+---
+
+### 7. Model Hub & Release Checkpoints
+
+Trained adapter checkpoints and SHA-256 integrity verification:
+- **Model Card:** [`MODEL_CARD.md`](MODEL_CARD.md) (Hugging Face format)
+- **Release Manifest:** [`release_assets/RELEASE_MANIFEST.json`](release_assets/RELEASE_MANIFEST.json)
+- **Release Notes:** [`release_assets/RELEASE_NOTES.md`](release_assets/RELEASE_NOTES.md)
+
+Verify local checkpoint integrity:
+```bash
+python scripts/verify_checkpoints.py
+```
+
+| Checkpoint File | Architecture | Role | Trainable % | SHA-256 Checksum |
+| :--- | :--- | :--- | :---: | :--- |
+| `best_cg_adapter_model.pth` | **CG-Adapter** | Flagship Proposed | 4.64% | `a09fcf2808dc101c87ea255b79a9830b4cb4c1e2e7ad1bd36e9c6756cbf73b38` |
+| `best_standard_adapter_model.pth` | Standard Adapter | Matched Baseline | 4.64% | `8e8e4a04acc7aa05236b34ffceb1f1168d7d48e86b15c232117e41bcca28ead3` |
+| `best_lora_model.pth` | LoRA ($r=16$) | Baseline | 4.93% | `e8c107d3c34e8122931909adcbb05410be42c1d79665fa61a735c6c7c82ea2ac` |
+| `best_decoder_only_model.pth` | Decoder-Only | Baseline | 4.33% | `695430f33f9772da50972ed3a363671f0625a5081804336264be2d02f4ad896f` |
+| `medsam_vit_b.pth` | MedSAM ViT-B | Frozen Foundation | 0.00% | `34b34b78c1d18cb8c6bf84cf9c00e135d6d6c965699f3c0e31ef1bc9dcb5be74` |
+
