@@ -47,7 +47,8 @@ def deploy_model_hub(api: HfApi, repo_id: str = "raju-ai/CG-MedSAM"):
         "best_cg_adapter_model.pth",
         "best_standard_adapter_model.pth",
         "best_lora_model.pth",
-        "best_decoder_only_model.pth"
+        "best_decoder_only_model.pth",
+        "medsam_vit_b.pth"
     ]
     for ckpt_name in ckpts:
         p = checkpoints_dir / ckpt_name
