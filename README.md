@@ -3,7 +3,9 @@
 ## Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation (CG-MedSAM)
 
 [![CG-MedSAM CI Pipeline](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml/badge.svg)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/raju-sah/MedSAM-For-Skin-Segmentation/blob/main/notebooks/CG_MedSAM_Quickstart.ipynb)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(HTTPS)-success?style=flat&logo=cloudflare)](https://cliff-knowing-howard-replication.trycloudflare.com)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Demo-yellow)](https://huggingface.co/spaces/raju-ai/CG-MedSAM-Showcase)
 [![Project Website](https://img.shields.io/badge/Project-Website-emerald?style=flat&logo=github)](https://raju-sah.github.io/MedSAM-For-Skin-Segmentation/)
 [![Release](https://img.shields.io/github/v/release/raju-sah/MedSAM-For-Skin-Segmentation?color=blue)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/releases/tag/v1.0.0)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-CG--MedSAM-orange)](https://huggingface.co/raju-ai/CG-MedSAM)
