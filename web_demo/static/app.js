@@ -10,7 +10,10 @@ const state = {
   imageDimensions: { width: 0, height: 0 },
   bbox: [0, 0, 100, 100],    // [x1, y1, x2, y2]
   selectedModel: 'cg_adapter',
-  viewMode: 'overlay',       // 'overlay', 'split', 'mask', 'original'
+  viewMode: 'overlay',       // 'overlay', 'split', 'compare', 'mask', 'original'
+  promptMode: 'box',         // 'box', 'point'
+  pointPrompt: { fg: null, bg: null, radius: 30 },
+  compareResults: null,
   showCore: true,
   showRing: true,
   isDrawing: false,
@@ -32,6 +35,16 @@ const elements = {
   btnRunSegment: document.getElementById('btnRunSegment'),
   segmentBtnText: document.getElementById('segmentBtnText'),
   segmentSpinner: document.getElementById('segmentSpinner'),
+  btnModeBox: document.getElementById('btnModeBox'),
+  btnModePoint: document.getElementById('btnModePoint'),
+  boxControlsGroup: document.getElementById('boxControlsGroup'),
+  pointControlsGroup: document.getElementById('pointControlsGroup'),
+  inputFgX: document.getElementById('inputFgX'),
+  inputFgY: document.getElementById('inputFgY'),
+  inputRadius: document.getElementById('inputRadius'),
+  btnRunCompare: document.getElementById('btnRunCompare'),
+  compareBtnText: document.getElementById('compareBtnText'),
+  compareSpinner: document.getElementById('compareSpinner'),
   inputX1: document.getElementById('inputX1'),
   inputY1: document.getElementById('inputY1'),
   inputX2: document.getElementById('inputX2'),
@@ -298,6 +311,53 @@ function setupEventListeners() {
     });
   });
 
+  // Prompt Mode Switching
+  if (elements.btnModeBox && elements.btnModePoint) {
+    elements.btnModeBox.addEventListener('click', () => {
+      state.promptMode = 'box';
+      elements.btnModeBox.classList.add('active');
+      elements.btnModePoint.classList.remove('active');
+      elements.boxControlsGroup.style.display = 'block';
+      elements.pointControlsGroup.style.display = 'none';
+      elements.canvasHint.textContent = 'Drag on image to draw bounding box, or drag corners to adjust';
+      renderCanvas();
+    });
+
+    elements.btnModePoint.addEventListener('click', () => {
+      state.promptMode = 'point';
+      elements.btnModePoint.classList.add('active');
+      elements.btnModeBox.classList.remove('active');
+      elements.boxControlsGroup.style.display = 'none';
+      elements.pointControlsGroup.style.display = 'block';
+      elements.canvasHint.textContent = 'Left-click for foreground target pin. Right-click for background skin.';
+      if (!state.pointPrompt.fg && state.currentImage) {
+        state.pointPrompt.fg = {
+          x: Math.round((state.bbox[0] + state.bbox[2]) / 2),
+          y: Math.round((state.bbox[1] + state.bbox[3]) / 2)
+        };
+        if (elements.inputFgX && elements.inputFgY) {
+          elements.inputFgX.value = state.pointPrompt.fg.x;
+          elements.inputFgY.value = state.pointPrompt.fg.y;
+        }
+      }
+      renderCanvas();
+    });
+  }
+
+  if (elements.inputRadius) {
+    elements.inputRadius.addEventListener('change', () => {
+      state.pointPrompt.radius = parseInt(elements.inputRadius.value) || 30;
+      renderCanvas();
+    });
+  }
+
+  // Model Comparison Button
+  if (elements.btnRunCompare) {
+    elements.btnRunCompare.addEventListener('click', async () => {
+      await executeComparison();
+    });
+  }
+
   // Run Segmentation
   elements.btnRunSegment.addEventListener('click', async () => {
     await executeSegmentation();
@@ -347,7 +407,29 @@ function setupCanvasInteractions() {
     return null;
   }
 
+  canvas.addEventListener('contextmenu', (e) => {
+    if (state.promptMode === 'point') {
+      e.preventDefault();
+      const pt = getCanvasCoords(e);
+      state.pointPrompt.bg = pt;
+      renderCanvas();
+    }
+  });
+
   canvas.addEventListener('mousedown', (e) => {
+    if (state.promptMode === 'point') {
+      if (e.button === 0) {
+        const pt = getCanvasCoords(e);
+        state.pointPrompt.fg = pt;
+        if (elements.inputFgX && elements.inputFgY) {
+          elements.inputFgX.value = pt.x;
+          elements.inputFgY.value = pt.y;
+        }
+        renderCanvas();
+      }
+      return;
+    }
+
     const pt = getCanvasCoords(e);
     const handle = getHandleUnderCursor(pt);
 
@@ -430,17 +512,36 @@ async function executeSegmentation() {
   elements.btnRunSegment.disabled = true;
 
   try {
-    const formData = new FormData();
-    formData.append('file', state.currentFile);
-    formData.append('x1', state.bbox[0]);
-    formData.append('y1', state.bbox[1]);
-    formData.append('x2', state.bbox[2]);
-    formData.append('y2', state.bbox[3]);
-    formData.append('model_name', state.selectedModel);
+    let data;
+    if (state.promptMode === 'point' && state.pointPrompt.fg) {
+      const formData = new FormData();
+      formData.append('file', state.currentFile);
+      formData.append('fg_x', state.pointPrompt.fg.x);
+      formData.append('fg_y', state.pointPrompt.fg.y);
+      if (state.pointPrompt.bg) {
+        formData.append('bg_x', state.pointPrompt.bg.x);
+        formData.append('bg_y', state.pointPrompt.bg.y);
+      }
+      formData.append('radius', state.pointPrompt.radius);
+      formData.append('model_name', state.selectedModel);
 
-    const res = await fetch('/api/segment', { method: 'POST', body: formData });
-    if (!res.ok) throw new Error('Segmentation failed.');
-    const data = await res.json();
+      const res = await fetch('/api/segment_point', { method: 'POST', body: formData });
+      if (!res.ok) throw new Error('Point segmentation failed.');
+      data = await res.json();
+    } else {
+      const formData = new FormData();
+      formData.append('file', state.currentFile);
+      formData.append('x1', state.bbox[0]);
+      formData.append('y1', state.bbox[1]);
+      formData.append('x2', state.bbox[2]);
+      formData.append('y2', state.bbox[3]);
+      formData.append('model_name', state.selectedModel);
+
+      const res = await fetch('/api/segment', { method: 'POST', body: formData });
+      if (!res.ok) throw new Error('Segmentation failed.');
+      data = await res.json();
+    }
+
     state.results = data;
 
     // Update Telemetry Panel
@@ -460,6 +561,49 @@ async function executeSegmentation() {
     elements.segmentBtnText.textContent = 'Segment Lesion';
     elements.segmentSpinner.style.display = 'none';
     elements.btnRunSegment.disabled = false;
+  }
+}
+
+// Execute Model Comparison API Call
+async function executeComparison() {
+  if (!state.currentFile) {
+    alert('Please upload or select an image first.');
+    return;
+  }
+
+  elements.compareBtnText.textContent = 'Comparing Models...';
+  elements.compareSpinner.style.display = 'inline-block';
+  elements.btnRunCompare.disabled = true;
+
+  try {
+    const formData = new FormData();
+    formData.append('file', state.currentFile);
+    formData.append('x1', state.bbox[0]);
+    formData.append('y1', state.bbox[1]);
+    formData.append('x2', state.bbox[2]);
+    formData.append('y2', state.bbox[3]);
+
+    const res = await fetch('/api/compare', { method: 'POST', body: formData });
+    if (!res.ok) throw new Error('Model comparison failed.');
+    const data = await res.json();
+    state.compareResults = data;
+
+    updateTelemetry(data.contrast_info);
+
+    // Switch viewMode to 'compare'
+    state.viewMode = 'compare';
+    document.querySelectorAll('.tab-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.view === 'compare');
+    });
+
+    renderCanvas();
+  } catch (err) {
+    console.error('Comparison error:', err);
+    alert('Error running model comparison: ' + err.message);
+  } finally {
+    elements.compareBtnText.textContent = '🔬 Compare CG vs Standard';
+    elements.compareSpinner.style.display = 'none';
+    elements.btnRunCompare.disabled = false;
   }
 }
 
@@ -542,6 +686,15 @@ function renderCanvas() {
     };
     overImg.src = state.results.overlay_base64;
     return;
+  } else if (state.compareResults && state.viewMode === 'compare') {
+    // CG vs Standard comparison overlay
+    const compImg = new Image();
+    compImg.onload = () => {
+      ctx.drawImage(compImg, 0, 0, w, h);
+      drawPromptGeometry(w, h);
+    };
+    compImg.src = state.compareResults.overlay_comparison_base64;
+    return;
   } else if (state.results && state.viewMode === 'split') {
     // Left half original, right half overlay
     ctx.drawImage(state.currentImage, 0, 0, w, h);
@@ -575,6 +728,44 @@ function renderCanvas() {
 
 // Draw Bounding Box, Eroded Core, Background Ring, and Drag Handles
 function drawPromptGeometry(w, h) {
+  if (state.promptMode === 'point') {
+    if (state.pointPrompt.fg) {
+      const { x, y } = state.pointPrompt.fg;
+      const r = state.pointPrompt.radius;
+      // Foreground green target
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, 2 * Math.PI);
+      ctx.fillStyle = '#22C55E';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.stroke();
+
+      // Radius ring
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(34, 197, 94, 0.5)';
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.restore();
+    }
+    if (state.pointPrompt.bg) {
+      const { x, y } = state.pointPrompt.bg;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, 2 * Math.PI);
+      ctx.fillStyle = '#3B82F6';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.stroke();
+      ctx.restore();
+    }
+    return;
+  }
+
   const [x1, y1, x2, y2] = state.bbox;
   const bw = x2 - x1;
   const bh = y2 - y1;

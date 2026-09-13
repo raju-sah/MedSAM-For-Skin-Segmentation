@@ -122,44 +122,73 @@
         <!-- Prompt Actions -->
         <section class="control-section">
           <div class="section-header">
-            <h2 class="section-title">4. Prompt Bounding Box</h2>
+            <h2 class="section-title">4. Prompt Mode</h2>
+            <div class="prompt-mode-tabs" id="promptModeTabs" style="display: flex; gap: 6px;">
+              <button type="button" class="btn ghost-btn active" id="btnModeBox" style="padding: 4px 10px; font-size: 11px;">Bounding Box</button>
+              <button type="button" class="btn ghost-btn" id="btnModePoint" style="padding: 4px 10px; font-size: 11px;">Point Click</button>
+            </div>
           </div>
-          <div class="prompt-action-row">
-            <button type="button" class="btn secondary-btn" id="btnAutoPrompt">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-              Auto-Detect Box
-            </button>
-            <button type="button" class="btn ghost-btn" id="btnResetBox">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              Reset
-            </button>
-          </div>
+          <div id="boxControlsGroup">
+            <div class="prompt-action-row">
+              <button type="button" class="btn secondary-btn" id="btnAutoPrompt">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                Auto-Detect Box
+              </button>
+              <button type="button" class="btn ghost-btn" id="btnResetBox">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Reset
+              </button>
+            </div>
 
-          <div class="coord-inputs-grid">
-            <div class="input-field">
-              <label>X1</label>
-              <input type="number" id="inputX1" value="0" min="0">
+            <div class="coord-inputs-grid">
+              <div class="input-field">
+                <label>X1</label>
+                <input type="number" id="inputX1" value="0" min="0">
+              </div>
+              <div class="input-field">
+                <label>Y1</label>
+                <input type="number" id="inputY1" value="0" min="0">
+              </div>
+              <div class="input-field">
+                <label>X2</label>
+                <input type="number" id="inputX2" value="100" min="1">
+              </div>
+              <div class="input-field">
+                <label>Y2</label>
+                <input type="number" id="inputY2" value="100" min="1">
+              </div>
             </div>
-            <div class="input-field">
-              <label>Y1</label>
-              <input type="number" id="inputY1" value="0" min="0">
-            </div>
-            <div class="input-field">
-              <label>X2</label>
-              <input type="number" id="inputX2" value="100" min="1">
-            </div>
-            <div class="input-field">
-              <label>Y2</label>
-              <input type="number" id="inputY2" value="100" min="1">
+          </div>
+          <div id="pointControlsGroup" style="display: none; padding-top: 6px;">
+            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 8px;">Click on lesion center to place <strong>Foreground point</strong>. Right-click for <strong>Background skin</strong>.</p>
+            <div class="coord-inputs-grid">
+              <div class="input-field">
+                <label>FG X</label>
+                <input type="number" id="inputFgX" value="0" readonly>
+              </div>
+              <div class="input-field">
+                <label>FG Y</label>
+                <input type="number" id="inputFgY" value="0" readonly>
+              </div>
+              <div class="input-field">
+                <label>Radius</label>
+                <input type="number" id="inputRadius" value="30" min="10" max="150">
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- Run Segment Button -->
-        <button type="button" class="btn primary-action-btn" id="btnRunSegment">
-          <span class="btn-spinner" id="segmentSpinner"></span>
-          <span class="btn-text" id="segmentBtnText">Segment Lesion</span>
-        </button>
+        <!-- Action Buttons Stack -->
+        <div class="action-buttons-stack" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+          <button type="button" class="btn primary-action-btn" id="btnRunSegment">
+            <span class="btn-spinner" id="segmentSpinner"></span>
+            <span class="btn-text" id="segmentBtnText">Segment Lesion</span>
+          </button>
+          <button type="button" class="btn secondary-btn" id="btnRunCompare" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; font-weight: 600; padding: 10px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <span class="btn-spinner" id="compareSpinner" style="display: none;"></span>
+            <span class="btn-text" id="compareBtnText">🔬 Compare CG vs Standard</span>
+          </button>
+        </div>
       </aside>
 
       <!-- Center Panel: Interactive Canvas & Visualizer -->
@@ -168,6 +197,7 @@
           <div class="tab-pill-group" id="viewModeGroup">
             <button type="button" class="tab-pill active" data-view="overlay">Composite Overlay</button>
             <button type="button" class="tab-pill" data-view="split">Side-by-Side Split</button>
+            <button type="button" class="tab-pill" data-view="compare">CG vs Standard</button>
             <button type="button" class="tab-pill" data-view="mask">Binary Mask</button>
             <button type="button" class="tab-pill" data-view="original">Original + Prompt</button>
           </div>

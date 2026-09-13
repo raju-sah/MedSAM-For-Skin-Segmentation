@@ -148,6 +148,153 @@ async def segment_lesion(
     }
 
 
+@app.post("/api/compare")
+async def compare_models(
+    file: UploadFile = File(...),
+    x1: int = Form(...),
+    y1: int = Form(...),
+    x2: int = Form(...),
+    y2: int = Form(...)
+):
+    """Run dual inference with CG-Adapter and Standard Adapter to generate a side-by-side comparison."""
+    contents = await file.read()
+    nparr = np.frombuffer(contents, np.uint8)
+    img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    if img_bgr is None:
+        raise HTTPException(status_code=400, detail="Invalid image file.")
+
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    orig_h, orig_w = img_rgb.shape[:2]
+
+    bbox = (
+        max(0, min(orig_w - 1, x1)),
+        max(0, min(orig_h - 1, y1)),
+        max(1, min(orig_w, x2)),
+        max(1, min(orig_h, y2))
+    )
+
+    # Load both models
+    model_cg, _ = get_or_load_model("cg_adapter")
+    model_std, _ = get_or_load_model("standard_adapter")
+
+    # Run inference on both
+    res_cg = run_inference(model_cg, img_rgb, bbox, device=DEVICE)
+    res_std = run_inference(model_std, img_rgb, bbox, device=DEVICE)
+
+    mask_cg = res_cg["mask"]
+    mask_std = res_std["mask"]
+
+    # Compute agreement Dice between the two predictions
+    intersection = np.sum((mask_cg > 0) & (mask_std > 0))
+    union_sum = np.sum(mask_cg > 0) + np.sum(mask_std > 0)
+    agreement_dice = round(float(2.0 * intersection / max(1, union_sum)), 4)
+
+    # Comparative RGB visual overlay
+    # Agreement: Green tint [34, 197, 94]
+    # CG-Adapter unique: Crimson tint [239, 68, 68]
+    # Standard Adapter unique: Amber tint [245, 158, 11]
+    overlay = img_rgb.copy().astype(np.float32)
+    cg_pos = (mask_cg > 0)
+    std_pos = (mask_std > 0)
+
+    both = cg_pos & std_pos
+    cg_only = cg_pos & (~std_pos)
+    std_only = std_pos & (~cg_pos)
+
+    overlay[both] = 0.45 * overlay[both] + 0.55 * np.array([34, 197, 94], dtype=np.float32)
+    overlay[cg_only] = 0.45 * overlay[cg_only] + 0.55 * np.array([239, 68, 68], dtype=np.float32)
+    overlay[std_only] = 0.45 * overlay[std_only] + 0.55 * np.array([245, 158, 11], dtype=np.float32)
+    overlay = np.clip(overlay, 0, 255).astype(np.uint8)
+
+    # Add legend to top of comparison image
+    cv2.putText(overlay, f"Agreement Dice: {agreement_dice:.3f}", (15, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+    cv2.putText(overlay, "Green: Agree | Red: CG Only | Amber: Std Only", (15, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (220, 220, 220), 1)
+
+    _, mask_cg_buf = cv2.imencode(".png", mask_cg)
+    _, mask_std_buf = cv2.imencode(".png", mask_std)
+    _, overlay_comp_buf = cv2.imencode(".png", cv2.cvtColor(overlay, cv2.COLOR_RGB2BGR))
+
+    return {
+        "status": "success",
+        "agreement_dice": agreement_dice,
+        "cg_area_px": int(np.sum(cg_pos)),
+        "std_area_px": int(np.sum(std_pos)),
+        "agreement_area_px": int(np.sum(both)),
+        "contrast_info": res_cg["contrast_info"],
+        "mask_cg_base64": f"data:image/png;base64,{base64.b64encode(mask_cg_buf).decode('utf-8')}",
+        "mask_std_base64": f"data:image/png;base64,{base64.b64encode(mask_std_buf).decode('utf-8')}",
+        "overlay_comparison_base64": f"data:image/png;base64,{base64.b64encode(overlay_comp_buf).decode('utf-8')}"
+    }
+
+
+@app.post("/api/segment_point")
+async def segment_lesion_point(
+    file: UploadFile = File(...),
+    fg_x: int = Form(...),
+    fg_y: int = Form(...),
+    bg_x: Optional[int] = Form(None),
+    bg_y: Optional[int] = Form(None),
+    radius: int = Form(30),
+    model_name: str = Form("cg_adapter")
+):
+    """Run point-prompt guided segmentation and return mask, overlay, and point contrast physics."""
+    from src.data.contrast_proxy import compute_point_contrast_proxy
+
+    contents = await file.read()
+    nparr = np.frombuffer(contents, np.uint8)
+    img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    if img_bgr is None:
+        raise HTTPException(status_code=400, detail="Invalid image file.")
+
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    orig_h, orig_w = img_rgb.shape[:2]
+
+    fg_point = (max(0, min(orig_w - 1, fg_x)), max(0, min(orig_h - 1, fg_y)))
+    bg_point = (max(0, min(orig_w - 1, bg_x)), max(0, min(orig_h - 1, bg_y))) if (bg_x is not None and bg_y is not None) else None
+
+    # Compute point contrast proxy
+    contrast_res = compute_point_contrast_proxy(img_rgb, fg_point, bg_point, estimated_radius=radius)
+
+    # Construct prompt bounding box centered on point for MedSAM backbone
+    r = max(15, radius)
+    bbox = (
+        max(0, fg_point[0] - r),
+        max(0, fg_point[1] - r),
+        min(orig_w, fg_point[0] + r),
+        min(orig_h, fg_point[1] + r)
+    )
+
+    model, is_mock = get_or_load_model(model_name)
+    result = run_inference(model, img_rgb, bbox, device=DEVICE)
+    mask = result["mask"]
+    contrast_info = result["contrast_info"]
+    contrast_info["point_delta_e"] = round(float(contrast_res.delta_e_ab), 2)
+    contrast_info["prompt_mode"] = "point_click"
+
+    overlay_rgb = create_visual_overlay(img_rgb, mask, contrast_info, model_name=f"{model_name} (Point)")
+    # Draw point markers on overlay
+    cv2.circle(overlay_rgb, fg_point, 5, (0, 255, 0), -1)
+    cv2.circle(overlay_rgb, fg_point, 7, (255, 255, 255), 2)
+    if bg_point is not None:
+        cv2.circle(overlay_rgb, bg_point, 5, (255, 0, 0), -1)
+        cv2.circle(overlay_rgb, bg_point, 7, (255, 255, 255), 2)
+
+    _, mask_buffer = cv2.imencode(".png", mask)
+    _, overlay_buffer = cv2.imencode(".png", cv2.cvtColor(overlay_rgb, cv2.COLOR_RGB2BGR))
+
+    return {
+        "status": "success",
+        "model": model_name,
+        "is_mock_foundation": is_mock,
+        "mask_base64": f"data:image/png;base64,{base64.b64encode(mask_buffer).decode('utf-8')}",
+        "overlay_base64": f"data:image/png;base64,{base64.b64encode(overlay_buffer).decode('utf-8')}",
+        "dimensions": {"width": orig_w, "height": orig_h},
+        "contrast_info": contrast_info,
+        "foreground_point": fg_point,
+        "background_point": bg_point
+    }
+
+
 @app.get("/api/samples")
 async def get_curated_samples():
     """Return metadata for curated multi-tone demonstration samples."""
