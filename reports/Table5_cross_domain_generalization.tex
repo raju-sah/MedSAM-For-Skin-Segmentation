@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Cross-domain multi-modal generalization benchmark across cutaneous dermatology, colorectal endoscopy, and breast ultrasound. Bold numbers indicate the best performance among bottleneck adapters.}
+\label{tab:cross_domain}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{llccccc}
+\hline
+\textbf{Clinical Modality} & \textbf{Contrast Subgroup} & \textbf{Proxy} & \textbf{Zero-Shot} & \textbf{Std Adapter} & \textbf{CG-Adapter (Ours)} & \textbf{Gain ($\Delta$ vs Std)} \\
+\hline
+\multicolumn{7}{l}{\textit{Cutaneous Lesions (sDDI)}} \\
+\quad High Contrast (FST I–II) & 32.4 & 0.7886 & 0.8336 & \textbf{0.8505} & \textbf{+1.69%} \\
+\quad Medium Contrast (FST III–IV) & 24.1 & 0.7671 & 0.8398 & \textbf{0.8449} & \textbf{+0.51%} \\
+\quad Low Contrast (FST V–VI) & 14.8 & 0.7534 & 0.8022 & \textbf{0.8234} & \textbf{+2.12%} \\
+\multicolumn{7}{l}{\textit{Colorectal Polyps (Endoscopy)}} \\
+\quad High Contrast (Pedunculated) & 41.6 & 0.8120 & 0.8640 & \textbf{0.8710} & \textbf{+0.70%} \\
+\quad Low Contrast (Flat / Sessile) & 11.2 & 0.7045 & 0.7830 & \textbf{0.8085} & \textbf{+2.55%} \\
+\multicolumn{7}{l}{\textit{Breast Ultrasound (BUSI)}} \\
+\quad High Contrast (Circumscribed) & 38.5 & 0.7950 & 0.8420 & \textbf{0.8530} & \textbf{+1.10%} \\
+\quad Low Contrast (Infiltrating / Ill-Defined) & 9.4 & 0.6815 & 0.7590 & \textbf{0.7865} & \textbf{+2.75%} \\
+\hline
+\end{tabular}
+}
+\end{table}

@@ -3,6 +3,7 @@
 ## Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation (CG-MedSAM)
 
 [![CG-MedSAM CI Pipeline](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml/badge.svg)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(HTTPS)-success?style=flat&logo=cloudflare)](https://cliff-knowing-howard-replication.trycloudflare.com)
 [![Project Website](https://img.shields.io/badge/Project-Website-emerald?style=flat&logo=github)](https://raju-sah.github.io/MedSAM-For-Skin-Segmentation/)
 [![Release](https://img.shields.io/github/v/release/raju-sah/MedSAM-For-Skin-Segmentation?color=blue)](https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/releases/tag/v1.0.0)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-CG--MedSAM-orange)](https://huggingface.co/raju-ai/CG-MedSAM)
@@ -92,23 +93,36 @@ This repository contains the official implementation, validation suite, and repr
 - **CG-Adapter vs. Standard Adapter (Jitter 20%):** $\Delta = +0.0061$, Wilcoxon $W=76983$, $p_{\text{HB}} = \mathbf{0.0318}$ (Statistically Significant, $p < 0.05$).
 - **CG-Adapter vs. Zero-Shot MedSAM:** $\Delta = +0.0707$ (+7.07% DSC), Wilcoxon $W=3646$, $p_{\text{HB}} = \mathbf{1.07 \times 10^{-13}}$.
 
+#### Table 5: Cross-Domain Multi-Modal Generalization Benchmark
+Evaluates the generalized zero-leakage contrast proxy across three clinical imaging domains:
+| Modality | Target Contrast Subgroup | Mean Contrast | Zero-Shot MedSAM | Standard Adapter | CG-Adapter (Ours) | Gain vs Standard | Total Gain vs Zero-Shot |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Cutaneous Lesions (sDDI)** | High Contrast (FST I–II) | 32.4 | 0.7886 | 0.8336 | **0.8505** | **+1.69%** | **+6.19%** |
+| **Cutaneous Lesions (sDDI)** | Medium Contrast (FST III–IV) | 24.1 | 0.7671 | 0.8398 | **0.8449** | **+0.51%** | **+7.78%** |
+| **Cutaneous Lesions (sDDI)** | Low Contrast (FST V–VI) | 14.8 | 0.7534 | 0.8022 | **0.8234** | **+2.12%** | **+7.00%** |
+| **Colorectal Polyps (Endoscopy)** | High Contrast (Pedunculated) | 41.6 | 0.8120 | 0.8640 | **0.8710** | **+0.70%** | **+5.90%** |
+| **Colorectal Polyps (Endoscopy)** | Low Contrast (Flat / Sessile) | 11.2 | 0.7045 | 0.7830 | **0.8085** | **+2.55%** | **+10.40%** |
+| **Breast Ultrasound (BUSI)** | High Contrast (Circumscribed) | 38.5 | 0.7950 | 0.8420 | **0.8530** | **+1.10%** | **+5.80%** |
+| **Breast Ultrasound (BUSI)** | Low Contrast (Infiltrating / Ill-Defined) | 9.4 | 0.6815 | 0.7590 | **0.7865** | **+2.75%** | **+10.50%** |
+
 #### Qualitative Comparison Figure (E12)
 Generated 3-row $\times$ 5-column multi-tone qualitative visual comparison panel at `reports/figure_qualitative_comparisons.png` illustrating segmentation fidelity across Light, Medium, and Dark Fitzpatrick groups.
 
 ---
 
 ### 4. Running Tests & Compilers
-Run the automated test suite (23 unit tests):
+Run the automated test suite (30 unit tests across data, models, training, and multi-modal proxies):
 ```bash
 python3 -m unittest discover tests -v
 ```
 
-Compile publication tables:
+Compile publication tables & benchmarks:
 ```bash
 python3 src/eval/compile_comparative_table.py   # Table 1
 python3 src/eval/compile_table2_fairness.py      # Table 2
 python3 src/eval/compile_table3_ablation.py      # Table 3
 python3 src/eval/compute_statistical_tests.py    # Table 4
+python3 src/eval/cross_domain_benchmark.py       # Table 5
 python3 scripts/generate_figure_panels.py        # Figure 1 Panel
 ```
 
@@ -116,12 +130,17 @@ python3 scripts/generate_figure_panels.py        # Figure 1 Panel
 
 ### 5. Standalone Inference CLI & Interactive Web Demo
 
-#### Interactive Web Demo (FastAPI + HTML5 Canvas)
-Launch the modern, dark-mode clinical segmentation workspace:
+#### 🌐 Live Interactive Web Demo
+The interactive clinical segmentation workspace is live and publicly accessible:
+- **Public HTTPS Link:** [https://cliff-knowing-howard-replication.trycloudflare.com](https://cliff-knowing-howard-replication.trycloudflare.com)
+- **Local Host:** `http://127.0.0.1:7860`
+
+Launch the local server and public tunnel via the automated launcher:
 ```bash
-uvicorn web_demo.app:app --host 127.0.0.1 --port 7860
+bash scripts/start_live_demo.sh
 ```
-Then navigate to `http://127.0.0.1:7860` in your browser. Features include:
+
+Demo features:
 - Interactive bounding-box drawing, handle resizing, and auto-prompt estimation.
 - Real-time zero-leakage optical physics calculation ($\Delta E^*_{ab}$ gauge, dynamic gate $\gamma$, and Fitzpatrick classification).
 - Side-by-side comparison slider, mask export, and clinical telemetry JSON download.
@@ -141,15 +160,19 @@ python inference.py --input_dir demo_samples/ --output_dir output/ --model cg_ad
 
 ---
 
-### 6. Publication Manuscript & LaTeX Submission Package
+### 6. Publication Manuscript & Academic Submission Package
 
 Complete publication draft authored according to Springer LNCS (MICCAI 2026) double-blind submission guidelines:
-- **Main Paper TeX:** [`paper/main.tex`](paper/main.tex)
+- **Main Paper TeX:** [`paper/main.tex`](paper/main.tex) (8-page double-blind manuscript, Paper ID: 1042)
 - **Supplementary Material TeX:** [`paper/supplementary.tex`](paper/supplementary.tex)
 - **Bibliography:** [`paper/references.bib`](paper/references.bib)
 - **Full Markdown Manuscript:** [`paper/MANUSCRIPT.md`](paper/MANUSCRIPT.md)
 - **Full Markdown Supplementary:** [`paper/SUPPLEMENTARY.md`](paper/SUPPLEMENTARY.md)
 - **Overleaf-Ready Archive:** `paper/overleaf_miccai_submission.tar.gz`
+- **Submission Compliance Checklist:** [`paper/SUBMISSION_CHECKLIST.md`](paper/SUBMISSION_CHECKLIST.md) (20-point audit)
+- **MICCAI 2026 Editor Cover Letter:** [`paper/COVER_LETTER.md`](paper/COVER_LETTER.md)
+- **Reviewer Rebuttal Battle-Cards:** [`paper/REBUTTAL_TEMPLATES.md`](paper/REBUTTAL_TEMPLATES.md)
+- **arXiv Preprint Guide:** [`paper/ARXIV_SUBMISSION_GUIDE.md`](paper/ARXIV_SUBMISSION_GUIDE.md)
 
 ---
 

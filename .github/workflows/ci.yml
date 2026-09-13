@@ -42,3 +42,4 @@ jobs:
           python src/eval/compile_table2_fairness.py
           python src/eval/compile_table3_ablation.py
           python src/eval/compute_statistical_tests.py
+          python src/eval/cross_domain_benchmark.py
