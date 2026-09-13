@@ -1,0 +1,62 @@
+{
+  "release_version": "1.0.0",
+  "release_tag": "v1.0.0",
+  "release_date": "2026-09-13 03:25:35 UTC",
+  "git_commit": "afedfc79989864d5c2db215b151b5704be61ce39",
+  "archive": {
+    "filename": "cg_medsam_peft_weights_v1.0.tar.gz",
+    "size_bytes": 146169317,
+    "size_mb": 139.4,
+    "sha256": "5b639b2811709d7bb1f51af6092881f4bf91d95a006b5774f775949baef8b44c"
+  },
+  "checkpoints": [
+    {
+      "name": "best_cg_adapter_model.pth",
+      "model_type": "cg_adapter",
+      "role": "Proposed Model (Flagship)",
+      "trainable_params": 4363824,
+      "trainable_pct": 4.64,
+      "description": "Contrast-Gated Bottleneck Adapter with zero-leakage CIE Lab modulation",
+      "filename": "best_cg_adapter_model.pth",
+      "size_bytes": 17528883,
+      "size_mb": 16.72,
+      "sha256": "a09fcf2808dc101c87ea255b79a9830b4cb4c1e2e7ad1bd36e9c6756cbf73b38"
+    },
+    {
+      "name": "best_standard_adapter_model.pth",
+      "model_type": "standard_adapter",
+      "role": "Comparative Baseline (Parameter-Matched)",
+      "trainable_params": 4362660,
+      "trainable_pct": 4.64,
+      "description": "Bottleneck Adapter with static factor gamma=1.0",
+      "filename": "best_standard_adapter_model.pth",
+      "size_bytes": 17510151,
+      "size_mb": 16.7,
+      "sha256": "8e8e4a04acc7aa05236b34ffceb1f1168d7d48e86b15c232117e41bcca28ead3"
+    },
+    {
+      "name": "best_lora_model.pth",
+      "model_type": "lora",
+      "role": "Comparative Baseline",
+      "trainable_params": 4648164,
+      "trainable_pct": 4.93,
+      "description": "Low-Rank Adaptation (r=16, alpha=32) on ViT attention projections",
+      "filename": "best_lora_model.pth",
+      "size_bytes": 106063151,
+      "size_mb": 101.15,
+      "sha256": "e8c107d3c34e8122931909adcbb05410be42c1d79665fa61a735c6c7c82ea2ac"
+    },
+    {
+      "name": "best_decoder_only_model.pth",
+      "model_type": "decoder_only",
+      "role": "Comparative Baseline",
+      "trainable_params": 4058340,
+      "trainable_pct": 4.33,
+      "description": "Mask Decoder fine-tuning with frozen ViT-B image encoder",
+      "filename": "best_decoder_only_model.pth",
+      "size_bytes": 16276975,
+      "size_mb": 15.52,
+      "sha256": "695430f33f9772da50972ed3a363671f0625a5081804336264be2d02f4ad896f"
+    }
+  ]
+}

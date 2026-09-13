@@ -10,6 +10,7 @@ __pycache__/
 *.bin
 *.onnx
 checkpoints/
+!checkpoints/checksums.sha256
 
 # Virtual Environments
 venv/
@@ -23,6 +24,8 @@ scratch/
 .pytest_cache/
 .coverage
 htmlcov/
+release_assets/*.tar.gz
+demo_inference_results/
 
 # OS and IDE Files
 .DS_Store

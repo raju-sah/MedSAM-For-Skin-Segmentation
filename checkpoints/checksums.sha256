@@ -1,0 +1,8 @@
+# Checksums for MedSAM PEFT Models and Base Foundation Backbone
+# Algorithm: SHA-256
+
+a09fcf2808dc101c87ea255b79a9830b4cb4c1e2e7ad1bd36e9c6756cbf73b38  best_cg_adapter_model.pth
+8e8e4a04acc7aa05236b34ffceb1f1168d7d48e86b15c232117e41bcca28ead3  best_standard_adapter_model.pth
+e8c107d3c34e8122931909adcbb05410be42c1d79665fa61a735c6c7c82ea2ac  best_lora_model.pth
+695430f33f9772da50972ed3a363671f0625a5081804336264be2d02f4ad896f  best_decoder_only_model.pth
+34b34b78c1d18cb8c6bf84cf9c00e135d6d6c965699f3c0e31ef1bc9dcb5be74  medsam_vit_b.pth
