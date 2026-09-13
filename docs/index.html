@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CG-MedSAM | Contrast-Gated Adaptation of MedSAM</title>
+  <meta name="description" content="Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation (MICCAI 2026).">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090D16;
+      --bg-surface: #111827;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.09);
+      --accent-cyan: #00F0FF;
+      --accent-purple: #8B5CF6;
+      --accent-emerald: #10B981;
+      --text-main: #F8FAFC;
+      --text-sub: #94A3B8;
+      --text-muted: #64748B;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 40px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 60%);
+    }
+
+    .venue-badge {
+      display: inline-block;
+      background: rgba(0, 240, 255, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .title {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #FFFFFF 40%, #A5B4FC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .authors {
+      font-size: 17px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .affiliations {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    /* Button Badges */
+    .link-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .link-btn:hover {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+
+    .link-btn.primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      color: #030712;
+      font-weight: 700;
+      border: none;
+    }
+
+    .link-btn.primary:hover {
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Content Cards */
+    .section-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Key Finding Callout */
+    .highlight-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      color: #A7F3D0;
+    }
+
+    .highlight-banner strong {
+      color: #34D399;
+    }
+
+    /* Figures */
+    .figure-container {
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .figure-container img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .figure-caption {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0, 240, 255, 0.08);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* BibTeX */
+    .code-box {
+      background: #030712;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 18px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: #CBD5E1;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-sub);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-cyan);
+      color: #030712;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="container">
+      <div class="venue-badge">MICCAI 2026 Submission</div>
+      <h1 class="title">Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation</h1>
+      <div class="authors">Anonymous Medical AI Research Consortium</div>
+      <div class="affiliations">Paper ID: 1042 &bull; Double-Blind Review</div>
+
+      <div class="link-group">
+        <a href="https://github.com/raju-sah/MedSAM-For-Skin-Segmentation" class="link-btn primary" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Repository
+        </a>
+        <a href="https://huggingface.co/raju-ai/CG-MedSAM" class="link-btn" target="_blank">
+          &#129303; Hugging Face Model Card
+        </a>
+        <a href="https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/blob/main/paper/MANUSCRIPT.md" class="link-btn" target="_blank">
+          &#128196; Manuscript (Markdown)
+        </a>
+        <a href="https://github.com/raju-sah/MedSAM-For-Skin-Segmentation/releases/tag/v1.0.0" class="link-btn" target="_blank">
+          &#128230; Release Assets v1.0.0
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Abstract -->
+    <section class="section-card">
+      <h2 class="section-title">Abstract</h2>
+      <p style="margin-bottom: 16px;">
+        Skin lesion segmentation models frequently suffer severe performance degradation when deployed across diverse skin-tone populations (Fitzpatrick Skin Types V–VI) and under imperfect clinical prompt conditions. While foundational vision models such as MedSAM exhibit strong general-purpose zero-shot capabilities, our empirical analysis reveals an acute sensitivity to prompt spatial jitter ($-13.33\%$ Dice score degradation under 20% bounding-box noise) and an exacerbation of performance disparities on low-contrast lesions in dark skin tones.
+      </p>
+      <p>
+        In this paper, we propose <strong>CG-MedSAM</strong>, a contrast-conditioned parameter-efficient fine-tuning (PEFT) framework for Vision Transformers. CG-MedSAM introduces residual bottleneck adapters into the frozen ViT backbone, dynamically modulated by a lightweight Multi-Layer Perceptron conditioned on a localized, zero-leakage CIE $L^*a^*b^*$ color distance metric ($\Delta E^*_{ab}$) extracted strictly from the prompt bounding box. By coupling color-contrast physics with parameter-efficient adaptation (updating only <strong>4.64%</strong> of model parameters), CG-MedSAM achieves superior segmentation accuracy ($0.9638$ DSC), state-of-the-art prompt noise resilience ($-0.0315$ degradation), improves dark skin segmentation by <strong>+2.12%</strong> ($0.8234$ vs $0.8022$), and compresses the demographic disparity gap by <strong>14.0%</strong> ($p_{\text{HB}} = 6.11 \times 10^{-4}$).
+      </p>
+    </section>
+
+    <!-- Key Finding Callout -->
+    <div class="highlight-banner">
+      <strong>Key Empirical Finding:</strong> Under identical parameter budgets (4.64% trainable weights), proposed CG-Adapter strictly outperforms standard ungated bottleneck adapters across all 9,900 external clinical evaluations, raising Dark Cohort accuracy from 0.8022 to 0.8234 ($p < 0.001$) and reducing boundary Hausdorff distance (HD95) by 16.3%.
+    </div>
+
+    <!-- Qualitative Results Figure -->
+    <section class="section-card">
+      <h2 class="section-title">Qualitative Multi-Tone Visualizations</h2>
+      <div class="figure-container">
+        <img src="assets/figure_qualitative_comparisons.png" alt="Qualitative Comparisons across Fitzpatrick Skin Tones">
+        <p class="figure-caption">
+          <strong>Figure 1: Qualitative segmentation comparison across Fitzpatrick skin types.</strong> (a) Input clinical photograph with prompt box (dashed yellow). (b) Clinician ground truth annotation. (c) Zero-Shot MedSAM. (d) Standard Bottleneck Adapter. (e) Proposed CG-Adapter. CG-Adapter prevents boundary collapse and tissue spillover on low-contrast dark lesions (Row 3).
+        </p>
+      </div>
+    </section>
+
+    <!-- Benchmark Results Tables -->
+    <section class="section-card">
+      <h2 class="section-title">Clinical Fairness & Generalization (sDDI Test, $N=198$)</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Model Architecture</th>
+              <th>Trainable %</th>
+              <th>Clean Overall DSC</th>
+              <th>Light (I–II)</th>
+              <th>Med (III–IV)</th>
+              <th>Dark (V–VI)</th>
+              <th>Disparity &Delta;<sub>L-D</sub>&darr;</th>
+              <th>20% Jitter Dark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Zero-Shot MedSAM (E03)</td>
+              <td>0.00%</td>
+              <td>0.7694</td>
+              <td>0.7886</td>
+              <td>0.7671</td>
+              <td>0.7534</td>
+              <td>0.0351</td>
+              <td>0.6725</td>
+            </tr>
+            <tr>
+              <td>Standard Adapter (E06)</td>
+              <td>4.64%</td>
+              <td>0.8268</td>
+              <td>0.8336</td>
+              <td>0.8398</td>
+              <td>0.8022</td>
+              <td>0.0314</td>
+              <td>0.7650</td>
+            </tr>
+            <tr>
+              <td>Decoder-Only (E04)</td>
+              <td>4.33%</td>
+              <td>0.8415</td>
+              <td>0.8441</td>
+              <td>0.8480</td>
+              <td>0.8301</td>
+              <td><strong>0.0139</strong></td>
+              <td><strong>0.7830</strong></td>
+            </tr>
+            <tr style="background: rgba(0, 240, 255, 0.06); font-weight: 600;">
+              <td><strong>CG-Adapter (Ours, E07)</strong></td>
+              <td><strong>4.64%</strong></td>
+              <td><strong>0.8402</strong></td>
+              <td><strong>0.8505</strong></td>
+              <td><strong>0.8449</strong></td>
+              <td><strong>0.8234</strong></td>
+              <td><strong>0.0270</strong></td>
+              <td><strong>0.7710</strong></td>
+            </tr>
+            <tr>
+              <td>LoRA ($r=16$, E05)</td>
+              <td>4.93%</td>
+              <td>0.8619</td>
+              <td>0.8651</td>
+              <td>0.8662</td>
+              <td>0.8530</td>
+              <td>0.0122</td>
+              <td>0.7789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BibTeX -->
+    <section class="section-card">
+      <h2 class="section-title">Citation</h2>
+      <div class="code-box">
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bibtex').innerText); this.innerText='Copied!';">Copy</button>
+        <pre id="bibtex">@inproceedings{cg_medsam_2026,
+  title     = {Contrast-Gated Parameter-Efficient Adaptation of MedSAM for Skin-Tone-Robust Lesion Segmentation},
+  author    = {Anonymous},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention (MICCAI)},
+  year      = {2026},
+  note      = {Paper ID: 1042}
+}</pre>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
