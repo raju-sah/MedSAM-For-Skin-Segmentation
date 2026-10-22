@@ -199,3 +199,8 @@ python scripts/verify_checkpoints.py
 | `best_decoder_only_model.pth` | Decoder-Only | Baseline | 4.33% | `695430f33f9772da50972ed3a363671f0625a5081804336264be2d02f4ad896f` |
 | `medsam_vit_b.pth` | MedSAM ViT-B | Frozen Foundation | 0.00% | `34b34b78c1d18cb8c6bf84cf9c00e135d6d6c965699f3c0e31ef1bc9dcb5be74` |
 
+
+
+## Licensing
+
+Original software code is licensed under Apache 2.0. Original manuscripts and author-created paper figures are licensed under CC BY 4.0. Third-party materials retain their own terms. See [LICENSING.md](LICENSING.md) for scope and exclusions.
